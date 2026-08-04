@@ -1,7 +1,9 @@
 # AI × Product Design Resources
 
-**Christopher Smith** — founder & builder working at the intersection of product design and AI; currently building [Xplor](https://christophersmith.io).
-[christophersmith.io](https://christophersmith.io) · [github.com/atebit](https://github.com/atebit)
+**Christopher Smith** — seasoned builder across design and engineering; currently building [Xplor](https://www.xplor.com) and a few other things.
+
+[christophersmith.io](https://christophersmith.io) 
+[github.com/atebit](https://github.com/atebit)
 
 ---
 
