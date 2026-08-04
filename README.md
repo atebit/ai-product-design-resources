@@ -24,7 +24,8 @@ The repo is built on a simple loop: **research the landscape → curate only wha
 │   └── subagents-and-commands.md  # 11 subagents & slash commands + prompt lessons
 └── docs/research/            # The research base the collection is grounded in
     ├── foundational/         #   6-doc landscape survey + synthesis (250+ sources)
-    └── prototype-construction/  # 12-doc architecture study: construction-file prototyping
+    ├── prototype-construction/  # 12-doc architecture study: construction-file prototyping
+    └── theming/              #   4-doc codification: OKLCH theme mutation + 3 portable skills
 ```
 
 ### [skillchains.md](skillchains.md) — the setup guide
@@ -39,6 +40,7 @@ The best skills, rules, hooks, MCP servers, subagents, and commands for design w
 
 - **[foundational/](docs/research/foundational/00-overview.md)** — six landscape documents covering agentic tooling primitives, AI × design systems, UI generation, graphic design & brand, motion/IxD/prototyping, and UX research & process. The [overview](docs/research/foundational/00-overview.md) synthesizes cross-cutting themes (the AI-legibility standards stack, the altitude ladder, verification loops, the evaluation gap) and a prioritized fan-out plan.
 - **[prototype-construction/](docs/research/prototype-construction/README.md)** — an original architecture for efficient prototype authoring: codify the design system as primitives, have the LLM emit a small schema-validated **construction file** instead of raw code, expand it deterministically with a builder, and iterate via surgical patches. The [folder README](docs/research/prototype-construction/README.md) explains the concept and briefs what the research has found; 12 documents cover the five pipeline stages plus a six-report tangential-patterns series (declarative infra, game engines, compilers, MDE, node graphs, constraint layout), consolidated in the [architecture synthesis](docs/research/prototype-construction/00-architecture-synthesis.md) with a falsifiable experiment roadmap (E0–E6).
+- **[theming/](docs/research/theming/README.md)** — theming as a *computation*: the three-tier semantic token model (brand reflows / neutrals tilt / sentiment pinned), OKLCH color mutation with gamut-clamped chroma, and contrast-preserving dark↔light reversal — codified from a production design system's shipping theming engine. Four docs and three portable skills including a verified zero-dependency [reflow engine](docs/research/theming/skills/oklch-brand-reflow/oklch-engine.ts).
 
 ## Status & roadmap
 
@@ -46,6 +48,7 @@ The best skills, rules, hooks, MCP servers, subagents, and commands for design w
 - [x] Construction-file prototyping architecture research (6 docs)
 - [x] Curated collection: skills, rules, hooks, MCP servers, subagents & commands
 - [x] Skillchains setup guide
+- [x] Theming & mathematical color mutation codification (4 docs + 3 skills)
 - [ ] Construction-file prototyping experiments (E0 baseline → E1 vertical slice) → builder skill, catalog extractor, intent template
 - [ ] Deep-dive fan-outs: prompting & aesthetic direction library, machine-readable design systems playbook, generated-UI evaluation, AI product UX patterns
 - [ ] Original artifacts for identified gaps: designer-audience altitude-ladder guide, expanded design hook library, motion patterns for AI product states
