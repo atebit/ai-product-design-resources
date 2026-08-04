@@ -1,6 +1,6 @@
 # AI × Product Design Resources
 
-**Christopher Smith** — seasoned builder across design and engineering; currently building [Xplor](https://www.xplor.com) and a few other things.
+**Christopher Smith** — seasoned builder across design and engineering; currently building enterprise software with [Xplor](https://www.xplor.com) and some other awesome folks.
 
 [christophersmith.io](https://christophersmith.io) 
 [github.com/atebit](https://github.com/atebit)
