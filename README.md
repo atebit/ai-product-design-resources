@@ -1,5 +1,10 @@
 # AI × Product Design Resources
 
+**Christopher Smith** — founder & builder working at the intersection of product design and AI; currently building [Xplor](https://christophersmith.io).
+[christophersmith.io](https://christophersmith.io) · [github.com/atebit](https://github.com/atebit)
+
+---
+
 Resources that make a designer's life easier when defining and executing AI workflows — across design systems, UI generation, graphic design, information architecture, animation, and interaction design.
 
 The repo is built on a simple loop: **research the landscape → curate only what survives verification → compose it into working setups**. Everything here has been through that loop.
