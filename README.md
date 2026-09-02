@@ -52,6 +52,8 @@ The best skills, rules, hooks, MCP servers, subagents, commands, review and feed
 
 ## Status & roadmap
 
+> **New research, not yet curated or wired in:** [docs/research/prototype-construction/](docs/research/prototype-construction/) gained 7 more docs (12–18) — behavior/interactivity encoding, schema migration, catalog extraction, responsive/motion, spec-authorship UX, pattern-harvesting, and a September 2026 landscape refresh — extending it from 12 to 19 documents; the folder README and synthesis doc still only describe 00–11. A new folder, [docs/research/prototype-review-overlay/](docs/research/prototype-review-overlay/), has 6 docs on building a drop-in review/commenting overlay for running prototypes (DOM anchoring, storage/sync, grading hooks, versioning, MVP feature cut, packaging/injection) — no README or synthesis yet. This batch was cut short mid-run (see commit history) and hasn't been live-reverified or folded into the collection below.
+
 - [x] Foundational landscape research (6 docs, ~250 sources)
 - [x] Construction-file prototyping architecture research (6 docs)
 - [x] Curated collection: skills, rules, hooks, MCP servers, subagents & commands
