@@ -15,31 +15,39 @@ The repo is built on a simple loop: **research the landscape → curate only wha
 ## What's in the repo
 
 ```
-├── skillchains.md            # START HERE to set things up — composing the collection into working chains
 ├── skill-resources/          # The curated collection (verified picks + writeups)
+│   ├── skillchains.md        #   START HERE to set things up — composing the collection into working chains
 │   ├── skills.md             #   14 agent skills for design work
 │   ├── rules.md              #   11 rules resources + what-to-encode guide with snippets
 │   ├── hooks.md              #   5 design-QA hook recipes + 5 vetted resources
 │   ├── mcp-servers.md        #   12 MCP servers + the recommended stack
-│   └── subagents-and-commands.md  # 11 subagents & slash commands + prompt lessons
+│   ├── subagents-and-commands.md  # 11 subagents & slash commands + prompt lessons
+│   ├── review-and-feedback.md     # Feedback surfaces, critique formats, templates, hook recipes
+│   ├── prototype-governance.md    # Lifecycle, ledger, promotion gate, Figma↔code sync tooling
+│   ├── guardrails-and-evals.md    # Guardrail ladder, structured output, routing, eval harnesses
+│   └── eval-loops.md              # Grade → review → feed back: the loop that improves a generator
 └── docs/research/            # The research base the collection is grounded in
     ├── foundational/         #   6-doc landscape survey + synthesis (250+ sources)
     ├── prototype-construction/  # 12-doc architecture study: construction-file prototyping
-    └── theming/              #   4-doc codification: OKLCH theme mutation + 3 portable skills
+    ├── theming/              #   4-doc codification: OKLCH theme mutation + 3 portable skills
+    ├── design-sdlc/          #   5-doc process study: source of truth, feedback, governance, guardrails
+    └── eval-tuning-loops/    #   6-doc loop study: grading, review, feeding back, training, governance
 ```
 
-### [skillchains.md](skillchains.md) — the setup guide
+### [skillchains.md](skill-resources/skillchains.md) — the setup guide
 
 How to compose the collection into five working chains — **UI generation**, **design-to-code**, **design QA & review**, **design system work**, and **research & strategy** — plus the config files involved, which pieces complement or conflict, how to adapt everything to your own design system, and how to push must-happen behavior toward determinism (hooks) instead of hope (prompts).
 
 ### [skill-resources/](skill-resources/README.md) — the curated collection
 
-The best skills, rules, hooks, MCP servers, subagents, and commands for design work — deliberately *not* thousands of entries. Every pick was verified live: repo exists, actively maintained, contents read and honestly judged. Each file includes per-pick writeups (what it does, how it works, where it fits in the design process) and an "Evaluated but not selected" list with reasons.
+The best skills, rules, hooks, MCP servers, subagents, commands, review and feedback tooling, prototype-governance scaffolds, guardrail/eval harnesses, and eval-loop tooling for design work — deliberately *not* thousands of entries. Every pick was verified live: repo exists, actively maintained, contents read and honestly judged. Each file includes per-pick writeups (what it does, how it works, where it fits in the design process) and an "Evaluated but not selected" list with reasons.
 
 ### [docs/research/](docs/research/foundational/00-overview.md) — the research base
 
 - **[foundational/](docs/research/foundational/00-overview.md)** — six landscape documents covering agentic tooling primitives, AI × design systems, UI generation, graphic design & brand, motion/IxD/prototyping, and UX research & process. The [overview](docs/research/foundational/00-overview.md) synthesizes cross-cutting themes (the AI-legibility standards stack, the altitude ladder, verification loops, the evaluation gap) and a prioritized fan-out plan.
 - **[prototype-construction/](docs/research/prototype-construction/README.md)** — an original architecture for efficient prototype authoring: codify the design system as primitives, have the LLM emit a small schema-validated **construction file** instead of raw code, expand it deterministically with a builder, and iterate via surgical patches. The [folder README](docs/research/prototype-construction/README.md) explains the concept and briefs what the research has found; 12 documents cover the five pipeline stages plus a six-report tangential-patterns series (declarative infra, game engines, compilers, MDE, node graphs, constraint layout), consolidated in the [architecture synthesis](docs/research/prototype-construction/00-architecture-synthesis.md) with a falsifiable experiment roadmap (E0–E6).
+- **[design-sdlc/](docs/research/design-sdlc/README.md)** — hardening the design process for an AI-native delivery loop: four live-verified answers to the questions that appear once prototypes scatter across Figma, code, hosted AI apps, and static mockups — **source of truth** (code-canonical, Figma-resident, mapping-layer maintained; nobody round-trips), **feedback** on prototypes that aren't on a canvas (rebuild the anchor and the overview; comments are now agent inputs), **governance** of prototypes outside the codebase (the ledger and the promotion gate, not the pipe), and **small-model guardrails** (a verifier, not a conscience; a 13-rung ladder split by interactive vs. automated mode). The [synthesis](docs/research/design-sdlc/00-synthesis.md) composes them into one lifecycle table and a five-step adoption order; four copy-paste templates ship with the docs.
+- **[eval-tuning-loops/](docs/research/eval-tuning-loops/README.md)** — the loop that improves a generator over time: every generated prototype gets a **grade** (rank, don't score; VLMs can't see spacing, so compute it from the DOM), the grade is **reviewed** (trust the check, sample the judge, own the taste; humans agree ~85% pairwise on UI, the best judge ~66%), and the reviewed grade is **fed back** into the skill, catalog, or prompt (constraint, then example, then sentence; textual feedback is the currency) or, late and rarely, into weights. The [synthesis](docs/research/eval-tuning-loops/00-synthesis.md) composes the five stage docs into one loop table, six convergence invariants, and a four-level maturity model; four templates ship with the docs (grade record, review card, change record, weekly review).
 - **[theming/](docs/research/theming/README.md)** — theming as a *computation*: the three-tier semantic token model (brand reflows / neutrals tilt / sentiment pinned), OKLCH color mutation with gamut-clamped chroma, and contrast-preserving dark↔light reversal — codified from a production design system's shipping theming engine. Four docs and three portable skills including a verified zero-dependency [reflow engine](docs/research/theming/skills/oklch-brand-reflow/oklch-engine.ts).
 
 ## Status & roadmap
@@ -49,6 +57,8 @@ The best skills, rules, hooks, MCP servers, subagents, and commands for design w
 - [x] Curated collection: skills, rules, hooks, MCP servers, subagents & commands
 - [x] Skillchains setup guide
 - [x] Theming & mathematical color mutation codification (4 docs + 3 skills)
+- [x] Design-SDLC process research (5 docs + 4 templates) → three new skill-resources categories: review & feedback, prototype governance, guardrails & evals
+- [x] Eval-tuning loops research (6 docs + 4 templates) → eval-loops collection: grading, review, feeding back, training, loop governance
 - [ ] Construction-file prototyping experiments (E0 baseline → E1 vertical slice) → builder skill, catalog extractor, intent template
 - [ ] Deep-dive fan-outs: prompting & aesthetic direction library, machine-readable design systems playbook, generated-UI evaluation, AI product UX patterns
 - [ ] Original artifacts for identified gaps: designer-audience altitude-ladder guide, expanded design hook library, motion patterns for AI product states

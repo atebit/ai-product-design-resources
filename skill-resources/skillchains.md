@@ -1,8 +1,8 @@
 # Skillchains: Composing the Collection into Working Setups
 
-A **skillchain** is a deliberate composition of the primitives in [skill-resources/](skill-resources/README.md) — rules + skills + commands/subagents + hooks + MCP servers — assembled for one design workflow. No single primitive makes an agent design-capable; the reliability comes from the chain: *rules constrain → skills direct → MCP connects → hooks enforce → subagents verify*.
+A **skillchain** is a deliberate composition of the primitives in [skill-resources/](README.md) — rules + skills + commands/subagents + hooks + MCP servers — assembled for one design workflow. No single primitive makes an agent design-capable; the reliability comes from the chain: *rules constrain → skills direct → MCP connects → hooks enforce → subagents verify*.
 
-This doc covers: where everything lives (config files), five ready-to-assemble chains, which pieces complement or conflict, how to adapt the setup to **your** design system, and how to think about determinism.
+This doc covers: where everything lives (config files), six ready-to-assemble chains, which pieces complement or conflict, how to adapt the setup to **your** design system, and how to think about determinism.
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@ This doc covers: where everything lives (config files), five ready-to-assemble c
 
 ## 1. Where everything lives (config files)
 
-All of this is per-project unless noted. Claude Code conventions shown; Cursor/Copilot equivalents in [rules.md](skill-resources/rules.md).
+All of this is per-project unless noted. Claude Code conventions shown; Cursor/Copilot equivalents in [rules.md](rules.md).
 
 ```
 your-project/
@@ -56,9 +56,9 @@ Install surfaces:
 
 Set this up once; every chain below assumes it.
 
-1. **CLAUDE.md with the seven encode-categories** from [rules.md](skill-resources/rules.md): token usage, component reuse, a11y floors, spacing/type scales, brand voice, aesthetic direction, and the self-verification ritual. Start from the snippets in that file and fill in your values (§5).
-2. **Hook recipe 1 (format-on-edit)** from [hooks.md](skill-resources/hooks.md) — Prettier/Stylelint on PostToolUse. Zero-risk, immediately removes a whole class of noise.
-3. **Playwright MCP** from [mcp-servers.md](skill-resources/mcp-servers.md) — the agent's eyes. Nearly every chain uses it for verification.
+1. **CLAUDE.md with the seven encode-categories** from [rules.md](rules.md): token usage, component reuse, a11y floors, spacing/type scales, brand voice, aesthetic direction, and the self-verification ritual. Start from the snippets in that file and fill in your values (§5).
+2. **Hook recipe 1 (format-on-edit)** from [hooks.md](hooks.md) — Prettier/Stylelint on PostToolUse. Zero-risk, immediately removes a whole class of noise.
+3. **Playwright MCP** from [mcp-servers.md](mcp-servers.md) — the agent's eyes. Nearly every chain uses it for verification.
 
 > Token-cost note: rules load on every turn — keep CLAUDE.md tight (constraints, not documentation). Skills load only when triggered; MCP tool results are the expensive part, so prefer targeted queries over full-file dumps.
 
@@ -66,7 +66,7 @@ Set this up once; every chain below assumes it.
 
 ## 3. The chains
 
-Each chain lists its pieces (all from [skill-resources/](skill-resources/README.md)), what each contributes, and the assembly notes that aren't obvious.
+Each chain lists its pieces (all from [skill-resources/](README.md)), what each contributes, and the assembly notes that aren't obvious.
 
 ### Chain A — UI generation (new screens, prototypes, marketing pages)
 
@@ -94,7 +94,7 @@ Each chain lists its pieces (all from [skill-resources/](skill-resources/README.
 | **shadcn MCP** or **Storybook MCP** | The agent discovers/installs *your* real components instead of inventing |
 | Hook recipe **2** (token-drift guard) | Blocks hardcoded values that slip through anyway |
 
-**Assembly notes:** the chain's strength scales with Code Connect coverage — without mappings, the Figma MCP returns visual context but the agent still guesses at component names (that's what the reuse rules + registry MCP backstop). No paid Figma seat? Swap in Framelink per the comparison table in [mcp-servers.md](skill-resources/mcp-servers.md). Don't run Storybook MCP and shadcn MCP together unless you genuinely use both — overlapping component-discovery tools confuse tool choice.
+**Assembly notes:** the chain's strength scales with Code Connect coverage — without mappings, the Figma MCP returns visual context but the agent still guesses at component names (that's what the reuse rules + registry MCP backstop). No paid Figma seat? Swap in Framelink per the comparison table in [mcp-servers.md](mcp-servers.md). Don't run Storybook MCP and shadcn MCP together unless you genuinely use both — overlapping component-discovery tools confuse tool choice.
 
 ### Chain C — Design QA & review (the crit loop)
 
@@ -137,6 +137,24 @@ Each chain lists its pieces (all from [skill-resources/](skill-resources/README.
 
 **Assembly notes:** this chain is nearly hook/MCP-free by nature — it produces documents, not code. Its output (a discovery brief, a strategy doc) is the natural *input* to Chain A: reference it explicitly when you switch.
 
+### Chain F — Prototype review & promotion (the loop between exploration and the PR)
+
+*The goal: prototypes that live outside the repo — Claude Design boards, Figma Make / v0 / Lovable apps, branch previews, static mockups — get seen, critiqued, and either promoted through a gate or retired, without a Figma canvas to hold them.*
+
+| Piece | Role |
+|---|---|
+| **Prototype ledger row + promotion checklist** ([prototype-governance.md](prototype-governance.md) templates) | The shared object every other piece points at: one row per prototype with DS version, status, expiry; one gate before a ticket or PR |
+| **Ledger-link gate** (prototype-governance Recipe A) | PR bodies or tickets carrying a prototype-host URL without a `PROTO-` id are rejected — inventory becomes deterministic |
+| **DS context object per tool** (prototype-governance picks 1–4) | Org DS / Make kit / v0 DS / Lovable DS attached before exploring, so throwaway work is on-system |
+| **Review request + structured critique response** ([review-and-feedback.md](review-and-feedback.md) templates) | Every review states what feedback is wanted; every comment carries route + viewport + state, problem and impact, not solution |
+| **Vercel / Netlify comments, artifact threads** (review-and-feedback picks 1–4) | The commenting surface, chosen by the playbook-by-artifact-type table |
+| **Contact-sheet-on-PR** (review-and-feedback Recipe A) | Rebuilds the "every screen at once" overview reviewers lost when the prototype left Figma |
+| **Unresolved-preview-comments gate** (review-and-feedback Recipe B) | The PR cannot be created or merged with open review threads |
+| **`@claude` address-review loop** (review-and-feedback pick 14) | Reviewed comments become agent tasks; the agent replies with what changed and why |
+| **design-review subagent** (Chain C) | Runs once, at the PR, after the human crit — not on every prototype |
+
+**Assembly notes:** this chain is mostly templates and three hooks; its cost is discipline, not tokens. Adopt in this order: ledger first (nothing else has an address without it), then the review templates and comment surface, then the two gates once the volume of prototypes makes skipped reviews a real risk. Use AI critique (Chain C subagent, `/critique-screen`) for *coverage* — states, a11y, copy consistency — in the same triage format humans use, and treat its severities as proposals; the research behind this chain found detection moderately reliable and severity judgments not. The prototype crosses the gate as a *reference package* (screens, states, decisions, DS version, evidence); code is rebuilt on the real stack except for narrow repo-connected polish. Background: the [design-sdlc research stream](../docs/research/design-sdlc/README.md).
+
 ---
 
 ## 4. Complementarity and conflicts
@@ -160,15 +178,15 @@ Each chain lists its pieces (all from [skill-resources/](skill-resources/README.
 
 The collection ships generic; the value appears when it speaks *your* system. Four adaptation layers, cheapest first:
 
-1. **Fill the rules snippets with your values.** The seven categories in [rules.md](skill-resources/rules.md) are templates: your token names, your spacing scale, your component list, your voice. One honest afternoon of work; biggest single lift in output quality.
+1. **Fill the rules snippets with your values.** The seven categories in [rules.md](rules.md) are templates: your token names, your spacing scale, your component list, your voice. One honest afternoon of work; biggest single lift in output quality.
 
-2. **Fork the brand-guidelines skill.** Anthropic's brand-guidelines skill ([skills.md](skill-resources/skills.md) pick 14) is explicitly a fork-template: replace its palette/type/spacing with yours, rename it (`acme-brand`), drop it in `.claude/skills/`. Now brand knowledge is model-triggered instead of burning always-on tokens.
+2. **Fork the brand-guidelines skill.** Anthropic's brand-guidelines skill ([skills.md](skills.md) pick 14) is explicitly a fork-template: replace its palette/type/spacing with yours, rename it (`acme-brand`), drop it in `.claude/skills/`. Now brand knowledge is model-triggered instead of burning always-on tokens.
 
-3. **Write a DESIGN.md.** The spec ([rules.md](skill-resources/rules.md) picks 3–4) captures identity + rationale in one portable file any agent can read. Atlassian's field test is the honest reference: it works ("recognizably on-brand output") but costs ~92% more tokens than serving equivalent context via MCP — right for small teams and portability, wrong as the end-state for a large system.
+3. **Write a DESIGN.md.** The spec ([rules.md](rules.md) picks 3–4) captures identity + rationale in one portable file any agent can read. Atlassian's field test is the honest reference: it works ("recognizably on-brand output") but costs ~92% more tokens than serving equivalent context via MCP — right for small teams and portability, wrong as the end-state for a large system.
 
 4. **Wire the system itself.** Code Connect mappings (design ↔ code), Storybook MCP over your stories, DTCG token export served to agents. This is Chain B/D territory and the highest-effort tier — do it after 1–3 prove out, and let coverage grow incrementally (map your ten most-used components first).
 
-**Non-Claude agents:** everything in layer 1 ports — maintain one AGENTS.md as the source and symlink/copy to CLAUDE.md and `.cursor/rules` (conversion notes in [rules.md](skill-resources/rules.md)). Skills and hooks are Claude Code-specific; the rules layer is your portable core.
+**Non-Claude agents:** everything in layer 1 ports — maintain one AGENTS.md as the source and symlink/copy to CLAUDE.md and `.cursor/rules` (conversion notes in [rules.md](rules.md)). Skills and hooks are Claude Code-specific; the rules layer is your portable core.
 
 ---
 
@@ -192,6 +210,10 @@ Practical corollaries:
 - **Determinism costs latency.** Every blocking hook adds seconds to every matching event. Reserve *blocking* for cheap checks (grep-based token guard) and gates that run rarely (PR review); make expensive checks advisory or event-scoped.
 - **Test your hooks like code.** A silently failing hook is worse than no hook — you believe the gate exists. `claude --debug` shows hook execution; verify each one fires before trusting it.
 
+**Cheap models extend the ladder downward.** Everything above assumes a capable model; with a Haiku-class executor the same spectrum has more rungs, because a small model needs an external verifier for nearly every step it takes. [guardrails-and-evals.md](guardrails-and-evals.md) carries the full ladder (short rules → gold exemplars → slot templates → registry query → format and token gates → schema-constrained output → bounded repair loop → completion gates → cheap-first escalation → cross-model review → a design-task eval set) with a one-afternoon interactive starter stack and a one-sprint automated one. The two rules that survive at every rung: *constrain selection, free the reasoning*, and *the thing that produced the artifact does not get to grade it*. Measure consistency as pass^k on a 20–50 task set before trusting a cheap-first cascade; the research behind it is in [design-sdlc/04](../docs/research/design-sdlc/04-small-model-guardrails.md).
+
+**Closing the loop over time.** An eval set tells you how often a chain works; it does not make the chain better next month. [eval-loops.md](eval-loops.md) carries the loop that does: every generated prototype gets a grade (deterministic gates first, a cross-family judge second, a human on a sampled remainder), the grade is reviewed against a fixed blind-labeled anchor set, and the reviewed grade becomes a versioned change at the right altitude — a hook or schema constraint before an exemplar, an exemplar before a rule, a prompt-optimizer run only for what nobody can phrase. Three invariants keep it honest: rank for improvement but gate for acceptance; only human-graded outputs become exemplars; version everything the grade depends on. Adopt it by maturity level, not all at once — the research is in [eval-tuning-loops](../docs/research/eval-tuning-loops/README.md).
+
 ---
 
 ## 7. Rollout order
@@ -201,6 +223,8 @@ Don't install everything at once — you won't know what's working. The order th
 1. **Week 1 — base layer** (§2): CLAUDE.md + format hook + Playwright MCP. Establish the verification habit.
 2. **Week 2 — your primary chain**: A if you mostly generate UI, B if you mostly implement designs. Adapt rules to your system (§5 layer 1).
 3. **Week 3 — the QA chain (C)**: once output volume is real, add the review gate. Start with `/design-review` on demand; promote to the PR hook when you trust it.
-4. **Then**: fork brand-guidelines (§5 layer 2), add Chain D/E as those workflows arise, and wire Code Connect/Storybook incrementally.
+4. **Week 4 — Chain F** once prototypes are landing outside the repo: ledger and promotion checklist first, review templates and a comment surface second, the two gates when skipped reviews become a real risk.
+5. **Then**: fork brand-guidelines (§5 layer 2), add Chain D/E as those workflows arise, wire Code Connect/Storybook incrementally, and — if you are routing work to Haiku-class executors — the guardrails starter stack and eval set from [guardrails-and-evals.md](guardrails-and-evals.md).
+6. **Month 2 onward — the eval loop**, one maturity level at a time from [eval-loops.md](eval-loops.md): grades written to the ledger row first, then a 20–50 task eval set with human error analysis, then the CI gate on skill changes, and only then a validated judge grading online.
 
 At each step the test is the same: *did output quality or reliability visibly improve?* If a piece isn't earning its context cost, remove it — the "Evaluated but not selected" sections exist because most things don't make the cut.

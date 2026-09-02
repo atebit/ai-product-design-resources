@@ -97,12 +97,20 @@ Prioritized candidates for the next phase. Each is scoped to become its own rese
 11. **Brand & asset pipelines** — brand-guidelines-as-context, style consistency (sref/oref, Firefly Custom Models), the brand.json opportunity, licensing/C2PA practicalities.
 12. **UX research & synthesis stack** — Dovetail/Marvin/etc. teardown, synthetic-users evidence review, AI-moderated research, agentic usability testing.
 13. **IA & content design with AI** — taxonomy/ontology tooling, conversational IA, voice-and-tone-as-prompts, terminology systems.
-14. **Code-to-design & design-as-code formats** — Pencil (.pen), Figma MCP write-path, html/story.to.design; the source-of-truth question.
+14. **Code-to-design & design-as-code formats** — Pencil (.pen), Figma MCP write-path, html/story.to.design; the source-of-truth question. *Done — see [design-sdlc/01](../design-sdlc/01-source-of-truth-figma-vs-code.md); the process-layer questions it raised (feedback outside Figma, prototype governance, small-model guardrails) are covered by the rest of the [design-sdlc stream](../design-sdlc/README.md).*
 15. **3D, sound & haptics** — the emerging frontier; lighter-touch watch-list doc.
 
 ### Tier 1b — The construction-file prototyping bet (researched, ready to prototype)
 
 The [prototype-construction series](../prototype-construction/00-architecture-synthesis.md) is past the research stage: it has a concrete pipeline design and an ordered experiment roadmap (E0 baseline → E1 vertical slice → granularity/format/spec ablations). Building E0+E1 would produce several of this repo's flagship artifacts in one stroke: a catalog-codification guide with extractor scripts, a builder skill (SKILL.md + scripts), an intent template, and iteration hooks — concrete instances of Tier 1 items 1, 3, and 5.
+
+### Companion stream: Design-SDLC process hardening
+
+A five-doc series in [docs/research/design-sdlc](../design-sdlc/README.md) answers the process questions that follow from themes 3 and 5 above once prototypes scatter across Figma, code, hosted AI apps, and static mockups: per-artifact source-of-truth allocation, feedback on prototypes that aren't on a canvas, governance and promotion of prototypes outside the codebase, and guardrails that let cheap models execute in one pass. Its [synthesis](../design-sdlc/00-synthesis.md) composes the answers into one lifecycle table with a gate and an agent guardrail per stage.
+
+### Companion stream: Eval-tuning loops
+
+A six-doc series in [docs/research/eval-tuning-loops](../eval-tuning-loops/README.md) takes theme 4 (evaluation is the biggest open gap) from measurement to improvement: how every generated prototype gets a grade, how machine and human review of that grade is calibrated, and how a reviewed grade becomes a versioned change to a skill, a catalog, a prompt, or — late and rarely — model weights. Its [synthesis](../eval-tuning-loops/00-synthesis.md) composes the stages into one loop with six convergence invariants and a maturity model.
 
 ### Suggested next step
 
