@@ -12,6 +12,18 @@
 | [04 — Deterministic Assembly](04-deterministic-assembly.md) | The builder: runtime interpretation vs codegen, skills packaging, determinism |
 | [05 — Surgical Editing & Iteration](05-surgical-editing-iteration.md) | The hybrid split, patch-based iteration, source-of-truth management |
 
+**Deep-dive series (12–18)** — a second research pass closing the open questions the first five docs left, plus a live re-verification of everything dated 2026:
+
+| Doc | Closes |
+|---|---|
+| [12 — Behavior & Interactivity Encoding](12-behavior-and-interactivity-encoding.md) | How prototypes click without logic in the spec: event→action tables, state-machine refs, bounded expressions |
+| [13 — Schema Evolution & Migration](13-schema-evolution-and-migration.md) | The one gap doc 09 flagged as unsolved: what happens to hundreds of construction files when the catalog changes |
+| [14 — Catalog Extraction from Real Design Systems](14-catalog-extraction-from-real-design-systems.md) | How much of the catalog can be auto-derived from source vs hand-curated, audited against 11 public design systems |
+| [15 — Responsive, Viewport & Motion in the File](15-responsive-viewport-and-motion-in-the-file.md) | Breakpoints, density, platform and motion intent without raw values or logic |
+| [16 — Spec Authorship UX](16-spec-authorship-ux.md) | Whether designers write YAML (they don't); conversational elicitation, forms, and the granularity floor |
+| [17 — Pattern Harvesting & Catalog Growth](17-pattern-harvesting-and-catalog-growth.md) | How the catalog discovers, promotes, and retires patterns so the ≥60–70% coverage bar is reached and held |
+| [18 — Landscape Refresh, September 2026](18-landscape-refresh-2026.md) | Re-verifies every prior-art and economics claim in docs 01–05 against what has shipped since |
+
 **Tangential-pattern series** — domains that solved "declarative spec → deterministic realization" long before LLMs, each report ending in a lessons-mapping onto this architecture:
 
 | Doc | Domain | What it contributes |
@@ -111,7 +123,29 @@ Six unrelated fields were surveyed for patterns; they converge with striking con
 
 10. **ComfyUI is the existence proof; trees are easier than graphs.** LLMs generate ComfyUI's JSON workflows at community scale today, and the research shows their failures concentrate in link-level DAG wiring — a tree-shaped construction file dodges that failure mode entirely (10).
 
-**New risk surfaced (09):** there is no construction-file **migration story** when pattern schemas evolve — the one real gap the original five docs didn't cover. Treat schema versioning + migration tooling (protobuf-style reserved ids, codemod-style migrators) as a first-class component before E1 hardens the schema.
+**New risk surfaced (09):** there is no construction-file **migration story** when pattern schemas evolve — the one real gap the original five docs didn't cover. Treat schema versioning + migration tooling (protobuf-style reserved ids, codemod-style migrators) as a first-class component before E1 hardens the schema. **Closed by doc 13** — see below.
+
+---
+
+## What the deep-dive series (12–18) found
+
+Seven more documents, each closing one gap the first five left open and each independently live-verified in September 2026. The headline results:
+
+**Behavior can stay logic-free (doc 12).** The worry that "no logic in the spec" would make prototypes inert turns out to be unfounded: production server-driven UI (Yelp's CHAOS, Spotify's Hub, Airbnb's Ghost Platform) and the 2026 generative-UI protocols independently converge on the same four primitives — named events, a small closed verb set (`nav.*`, `overlay.*`, `state.*`, `api.call`), JSON-Pointer bindings into one state tree, and a catalog of pure functions for conditions. Figma's own prototype model (12 triggers, 8 actions, a 15-operator expression grammar, no loops) is the designer-validated ceiling on how much vocabulary this actually needs. Async flows are handled by *referencing* builder-owned state machines rather than having the LLM author one: PSMBench found LLMs reach "up to 0.82 F1" naming states but "≤ 0.38 F1" wiring transition graphs, and ChatFSM's editing-not-authoring pattern got "83%" no-regression — so v1 has the model select and parameterize machines, never write them.
+
+**Schema evolution has a solved shape (doc 13).** Every construction file carries a `schemaVersion`; each breaking catalog release ships one migration module drawn from a small forward-only operator vocabulary (rename, enum-map, slot-split, token-alias — Cambria's lens vocabulary made one-directional); a CI gate refuses catalog PRs without a redirect or migrator, mirroring Bufs `FIELD_NO_DELETE_UNLESS_NAME_RESERVED` and Kubernetes's hub-version pattern. Real-world migration success splits cleanly by whether a deterministic pass runs first: Google's assisted migrations landed "74–80%" of changes when location-finding was mechanical, but the unassisted CODEMENV benchmark only reached "26.50%" pass@1 — so the architecture routes the mechanical majority through the operator chain and sends only the flagged residual to an LLM pass, gated by validate → build → screenshot before acceptance.
+
+**Extraction gets most of the way, curation owns the rest (doc 14).** React prop/variant extraction (react-docgen-typescript, cva/tailwind-variants, Storybook's `componentsManifest`) reliably yields types, variants, and states; what it cannot yield — composition rules, slot semantics, usage guidance ("Banner not Toast for…") — is exactly the material Atlassian's "context engine" post attributes its measured gains to (**"52% accuracy improvement in AI calls"**, re-confirmed live in doc 18). The recommended pipeline is extractor-generates + curated-overlay-merges + CI drift gate, not one or the other.
+
+**Responsive and motion fit the token-only, logic-free rule with the right vocabulary (doc 15).** Intrinsic layout presets (Every Layout's Stack/Cluster/Switcher/Sidebar/Grid, realized as container queries) need no breakpoints in the file at all; the only legal per-class override is a screen-level preset swap keyed to Android's three window-size classes. Motion is expressed as named relationships (`container-transform`, `shared-axis-x`, `fade-through` — Material's own transition taxonomy) rather than raw durations/easings, with `prefers-reduced-motion` as a builder rule. The doc confirms the grading stream's claim still holds: **"no open benchmark for responsive behavior"** exists as of September 2026.
+
+**Designers don't write YAML (doc 16).** Every tool that captures durable designer intent — Figma Make's `plan.md`, Lovable's `.lovable/plan.md`, Claude Code's editable plan — converges on the same shape: the model drafts a plan after light clarification, the human edits it, a button approves it. Clarification research delivers a sharp warning for a catalog-heavy prompt: models recognize ambiguity 60–80% of the time but only *ask* about it 0–5% of the time, and "adding context suppresses asking further" — meaning richer catalog context makes the model *less* likely to question intent unless clarification is a forced workflow step, not a hope.
+
+**The catalog grows itself, bounded (doc 17).** Frequent-subtree mining over slot contents and clone detection over `CustomBlock` islands are off-the-shelf (TreeMiner-family algorithms; NiCad/SourcererCC's "70% similarity" default) and match Figma's own detach-rate telemetry as a design-side precedent for "this component doesn't fit, and here's evidence." The size bound is empirical, not aesthetic: catalog-selection accuracy is tool-count-sensitive in exactly the way this architecture depends on staying small — Anthropic's own tool-use guidance says accuracy "degrades once you exceed 30–50 available tools," which sets the hot-catalog ceiling directly.
+
+**The 2026 landscape confirms the bet and commoditizes half of it (doc 18).** Three products now ship almost exactly stage 3 of this pipeline — Google's A2UI, Vercel's json-render (**1.36M weekly downloads**), and thesys's OpenUI — all catalog-constrained, schema-validated, and iterated by JSON Patch. That confirms the core thesis but weakens the differentiation story: none of them do deterministic offline codegen to committed, diffable source, none has a pattern layer above atomic components, and none shows a plan/apply preview before rebuild. The full verdict table is in [doc 18 §7](18-landscape-refresh-2026.md#7-verdict-the-bets-vs-2026-evidence); the short version is **reuse json-render's catalog format and interpreter path, Anthropic's GA structured outputs, and RFC 6902 patching; build the deterministic builder, the pattern layer, plan/apply, and the catalog extractor** — those four remain unoccupied by any shipping product.
+
+---
 
 ## Key decision points (the short list)
 
@@ -138,8 +172,10 @@ Ordered so each result can kill or redirect the project cheaply:
 
 **Success criteria vs E0:** ≥5× token reduction, ≥90% first-pass schema validity, zero off-system token/component violations, and design quality judged no worse. If E1 can't beat E0 on at least tokens + violations, stop.
 
+**Revisions from the 2026 landscape refresh ([doc 18 §10](18-landscape-refresh-2026.md#10-recommended-updates-to-the-e0e6-roadmap)):** E0 gains a second baseline — json-render's off-the-shelf interpreter on the same catalog, since "agent writes code" is no longer the only thing to beat. E1 should build the vertical slice on `@json-render/core` catalogs and SpecStream rather than a bespoke schema, emitting through Anthropic's now-GA `output_config.format` (flat, non-recursive) rather than forced `tool_choice`. E3's "terse DSL" arm becomes a fair fight now that OpenUI Lang and A2UI Express exist and claim real token savings, compiled back to the same JSON before validation. E5 gains an "intent, not patch" third arm (field + value; the builder computes the RFC 6902 op), since the JSON-Whisperer-family research names silent misapply, not patch-format choice, as the real failure mode. A new **E7 — catalog migration** tests doc 13's architecture directly: version the catalog with an A2UI-style `catalogId` and confirm specs written against v1 either build cleanly against v2 or fail loudly, never silently.
+
 ---
 
 ## What this becomes in the repo
 
-If the experiments validate, this architecture ships as a resource set: a **catalog-codification guide + extractor scripts** (Stage 1), an **intent.yaml template** (Stage 2), a **construction-file schema starter** (Stage 3), a **builder skill** (SKILL.md + scripts, Stage 4), and **iteration hooks** (validate/build/screenshot/a11y, Stage 5). It also directly feeds the Tier-1 topics in the [foundational overview](../foundational/00-overview.md): skills, hooks, and the altitude-ladder framework.
+If the experiments validate, this architecture ships as a resource set: a **catalog-codification guide + extractor scripts** (Stage 1, informed by [doc 14](14-catalog-extraction-from-real-design-systems.md)), an **intent.yaml template** (Stage 2, revised per [doc 16](16-spec-authorship-ux.md)), a **construction-file schema starter** covering structure, behavior ([doc 12](12-behavior-and-interactivity-encoding.md)), and responsive/motion vocabulary ([doc 15](15-responsive-viewport-and-motion-in-the-file.md)) (Stage 3), a **builder skill** (SKILL.md + scripts, Stage 4, reusing json-render's runtime per [doc 18](18-landscape-refresh-2026.md)), **iteration hooks** (validate/build/screenshot/a11y, Stage 5), a **migration module format** ([doc 13](13-schema-evolution-and-migration.md)), and a **pattern-harvesting job** ([doc 17](17-pattern-harvesting-and-catalog-growth.md)) that keeps the catalog at the coverage the architecture depends on. It also directly feeds the Tier-1 topics in the [foundational overview](../foundational/00-overview.md): skills, hooks, and the altitude-ladder framework.
