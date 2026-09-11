@@ -2,6 +2,8 @@
 
 The vetted collection of agent-workflow resources for designers: skills, rules, hooks, MCP servers, subagents, and commands — plus four process-layer collections: review & feedback tooling, prototype governance, guardrails & evals, and eval loops (the loop that improves a generator over time).
 
+One file here is not a collection at all: [figma-mcp-efficiency.md](figma-mcp-efficiency.md) is a cost analysis of the single most expensive server in the recommended stack — what the official Figma skills actually fix, what they make worse, and what to do instead.
+
 **Curation principle: the best, not the most.** Every entry was verified live (repo exists, actively maintained, contents actually read and judged) before inclusion. Each file ends with an "Evaluated but not selected" list so rejected candidates don't get re-litigated.
 
 For how to compose these into working setups, see [skillchains.md](skillchains.md) in this folder.
@@ -16,6 +18,7 @@ For how to compose these into working setups, see [skillchains.md](skillchains.m
 | [rules.md](rules.md) | Rules files — the "always-on constitution" layer (CLAUDE.md / .cursor/rules / AGENTS.md / copilot-instructions), plus a **what-to-encode guide** with verified snippets for tokens, component reuse, a11y floors, spacing/type scales, voice, anti-slop direction, and self-verification | 11 picks + 7 snippet categories |
 | [hooks.md](hooks.md) | Deterministic design-QA enforcement — **5 ready-to-use recipes** (format-on-edit, token-drift guard, screenshot-after-UI-change, a11y-on-stop, design-review-on-PR) with working settings.json snippets, plus vetted resources | 5 recipes + 5 resources |
 | [mcp-servers.md](mcp-servers.md) | The designer's MCP stack — headline: **Figma + Playwright + shadcn + Storybook**, with swap rules, verified tool surfaces, and a three-way Figma-server comparison | 12 servers |
+| [figma-mcp-efficiency.md](figma-mcp-efficiency.md) | **Analysis, not picks** — the Figma MCP cost model: three budgets (context / call quota / round trips) untangled, measured skill-load costs, the 42-tool surface, the verified rate-limit table, the leaner `skills-figquery` tree Claude Code doesn't load by default, and a 7-rung efficiency ladder | 1 analysis |
 | [subagents-and-commands.md](subagents-and-commands.md) | Delegated specialist agents (design-review, ui-designer, frontend-developer) and slash commands (`/design-review`, `/critique-screen`, `/handoff`, `/accessibility-audit`), plus prompt-writing lessons from the v0/Lovable system prompts | 11 picks |
 | [review-and-feedback.md](review-and-feedback.md) | Giving feedback on prototypes that aren't on a Figma canvas — comment surfaces for hosted prototypes and Claude artifacts, annotation-to-agent tools, rebuilding the "see every screen" overview, critique formats, feedback→agent loops; **a playbook by artifact type, two templates** (review request, structured critique response) and **2 hook recipes** (contact-sheet-on-PR, unresolved-preview-comments gate) | 14 picks + 2 recipes + 2 templates |
 | [prototype-governance.md](prototype-governance.md) | The lifecycle of design artifacts outside the repo — design-system context objects per prototyping tool, handoff paths, storage patterns, Figma↔code sync and drift tooling, process scaffolds; **lifecycle and source-of-truth allocation tables, two templates** (prototype ledger row, promotion checklist), **3 hook recipes** (ledger-link gate, flow-diagram contract, expiry sweep) and a rule snippet | 15 picks + 3 recipes + 2 templates |
@@ -50,6 +53,7 @@ The four process-layer collections sit *across* the ladder rather than at one ru
 | QA & review | design-review subagent, hook recipes 1–4, Playwright MCP, `/accessibility-audit`, webapp-testing skill |
 | Prototype review & feedback (outside Figma) | Playbook and templates in [review-and-feedback.md](review-and-feedback.md): Vercel/Netlify comments, artifact threads, contact-sheet hook, Conventional Comments, `@claude` review loop |
 | Prototype governance & promotion | Ledger, promotion checklist, DS context objects per tool, ledger-link gate, Figma↔code sync tooling in [prototype-governance.md](prototype-governance.md) |
+| Making the Figma MCP affordable | The three budgets, the `get_metadata` → narrow → fetch ladder, the `skills-figquery` swap, and when to drop to Framelink instead — [figma-mcp-efficiency.md](figma-mcp-efficiency.md) |
 | Handoff & ops | `/design-ops:handoff`, prototyping-testing plugin, screenshot + a11y hooks, handoff README template ([prototype-governance.md](prototype-governance.md)) |
 | Small-model reliability & evals | Guardrail ladder, gated Haiku executor, validate-and-repair loop, promptfoo design-task eval set in [guardrails-and-evals.md](guardrails-and-evals.md) |
 | Improving the generator over time | Grade record on the ledger row, trust tiers, anchor-set calibration, fix-altitude table, skill-change CI gate, maturity model in [eval-loops.md](eval-loops.md) |

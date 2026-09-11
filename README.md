@@ -21,6 +21,7 @@ The repo is built on a simple loop: **research the landscape → curate only wha
 │   ├── rules.md              #   11 rules resources + what-to-encode guide with snippets
 │   ├── hooks.md              #   5 design-QA hook recipes + 5 vetted resources
 │   ├── mcp-servers.md        #   12 MCP servers + the recommended stack
+│   ├── figma-mcp-efficiency.md # the Figma MCP cost model: what its skills fix, what they don't
 │   ├── subagents-and-commands.md  # 11 subagents & slash commands + prompt lessons
 │   ├── review-and-feedback.md     # Feedback surfaces, critique formats, templates, hook recipes
 │   ├── prototype-governance.md    # Lifecycle, ledger, promotion gate, Figma↔code sync tooling
@@ -39,6 +40,10 @@ The repo is built on a simple loop: **research the landscape → curate only wha
 ### [skillchains.md](skill-resources/skillchains.md) — the setup guide
 
 How to compose the collection into five working chains — **UI generation**, **design-to-code**, **design QA & review**, **design system work**, and **research & strategy** — plus the config files involved, which pieces complement or conflict, how to adapt everything to your own design system, and how to push must-happen behavior toward determinism (hooks) instead of hope (prompts).
+
+### [skill-resources/figma-mcp-efficiency.md](skill-resources/figma-mcp-efficiency.md) — the one cost analysis
+
+The official Figma MCP is the highest-fidelity design bridge available and the most expensive server in the stack. This separates the three budgets people conflate when they say it's slow — context window, call quota, round trips — measures each, and is honest about the answer: Figma's first-party skills are **not** a token diet (211 KB of `SKILL.md`, six of them mandatory gates before specific tool calls); they buy *round trips*. Includes the verified per-seat rate-limit table (View/Collab on a paid plan gets **6 calls a month**), the 42-tool surface, the leaner `skills-figquery` tree that only Cursor loads by default, and a seven-rung ladder ending in "swap the server."
 
 ### [skill-resources/](skill-resources/README.md) — the curated collection
 
@@ -63,6 +68,7 @@ The best skills, rules, hooks, MCP servers, subagents, commands, review and feed
 - [x] Design-SDLC process research (5 docs + 4 templates) → three new skill-resources categories: review & feedback, prototype governance, guardrails & evals
 - [x] Eval-tuning loops research (6 docs + 4 templates) → eval-loops collection: grading, review, feeding back, training, loop governance
 - [x] Prototype review overlay research (6 docs + synthesis + 4 templates) → prototype-review-overlay.md: anchoring, storage, grading, and packaging building blocks for a drop-in review package
+- [x] Figma MCP cost analysis → figma-mcp-efficiency.md (three budgets, measured skill-load costs, verified rate limits, the `skills-figquery` finding)
 - [ ] Construction-file prototyping experiments (E0 baseline → E1 vertical slice) → builder skill, catalog extractor, intent template
 - [ ] Deep-dive fan-outs: prompting & aesthetic direction library, machine-readable design systems playbook, generated-UI evaluation, AI product UX patterns
 - [ ] Original artifacts for identified gaps: designer-audience altitude-ladder guide, expanded design hook library, motion patterns for AI product states

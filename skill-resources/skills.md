@@ -49,7 +49,7 @@ Figma's first-party skills (1.8k★, pushed the day of this review) teach agents
 
 **Install:** Ships automatically with the Figma plugin for Claude Code (`/plugin install figma@claude-plugins-official`) or the Figma MCP server; requires the MCP connection to actually do anything. Figma also hosts a community skills page at [figma.com/community/skills](https://www.figma.com/community/skills).
 
-**Caveats:** Useless without the Figma MCP server connected (and some features assume paid Figma seats). Heavy skills — the workflows are long and token-hungry.
+**Caveats:** Useless without the Figma MCP server connected (and some features assume paid Figma seats). Heavy skills — the workflows are long and token-hungry: 211 KB of `SKILL.md` across the 14, with `figma-use` alone a ~9,000-token mandatory preamble to every `use_figma` call. They buy round trips, not context. Upstream also ships a second, leaner `skills-figquery/` tree that only Cursor loads by default. Full cost model, the rate-limit table, and the efficiency ladder: **[figma-mcp-efficiency.md](figma-mcp-efficiency.md)**.
 
 ### 3. designer-skills: design-research + ux-strategy plugins ([Owl-Listener/designer-skills](https://github.com/owl-listener/designer-skills))
 

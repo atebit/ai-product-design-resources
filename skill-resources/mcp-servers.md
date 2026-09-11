@@ -37,7 +37,7 @@ The minimal stack for a design-focused agent is **four servers** — one per rol
 
 Rationale: this covers the full loop — *read the design → build with real components → see the result → test it*. Everything else in this list is a swap or an addition for a specific situation:
 
-- **No paid Figma seat, or payloads too heavy?** Swap in **Framelink (Figma-Context-MCP)**.
+- **No paid Figma seat, or payloads too heavy?** Swap in **Framelink (Figma-Context-MCP)**. (What "too heavy" actually costs, and the ladder to try first: [figma-mcp-efficiency.md](figma-mcp-efficiency.md).)
 - **Need the agent to write into Figma or manage variables at scale?** Add **figma-console-mcp** (or use the official server's write tools).
 - **Debugging performance, network, or Chrome-specific rendering?** Swap Playwright for **Chrome DevTools MCP**.
 - **On Carbon?** Add **Carbon MCP**. Working design-in-IDE? Consider **Pencil**.
@@ -60,13 +60,13 @@ Rationale: this covers the full loop — *read the design → build with real co
 - `get_code_connect_map` / `add_code_connect_map` — mapping between Figma components and code components
 - Write tools (`create_new_file`, `use_figma`, `generate_diagram`, asset upload) for pushing designs/diagrams into Figma and FigJam
 
-**How it works.** Two modes: a **remote hosted server** at `https://mcp.figma.com/mcp` (OAuth, works on all seats and plans, no desktop app), and a **desktop server** run by the Figma desktop app that supports selection-based context ("implement my current selection") but requires a Dev or Full seat on a paid plan. Rate limits are per-seat (roughly 200 tool calls/day on Organization Full/Dev seats, 600 on Enterprise). Write-to-canvas is free during beta but flagged to become usage-based paid.
+**How it works.** Two modes: a **remote hosted server** at `https://mcp.figma.com/mcp` (OAuth, works on all seats and plans, no desktop app), and a **desktop server** run by the Figma desktop app that supports selection-based context ("implement my current selection") but requires a Dev or Full seat on a paid plan. Rate limits are per-seat: Dev/Full seats get 200 tool calls/day (15/min) on Professional and 600/day (20/min) on Organization, Enterprise unpublished — while View/Collab seats on any paid plan get **6 calls a month**, which is a demo, not a trial. See [figma-mcp-efficiency.md](figma-mcp-efficiency.md) for the full table and what it means for evaluation. Write-to-canvas is free during beta but flagged to become usage-based paid.
 
 **When to use.** Design-to-code and code-to-design; the design-system bridge when you have Code Connect coverage.
 
 **Quality/maturity.** Official, actively developed, the ecosystem default. Best-in-class fidelity, and the only option with Code Connect.
 
-**Caveats.** Full experience gated on paid seats; daily tool-call limits are real in heavy sessions; `get_design_context` payloads for large frames are token-expensive — use the `get_metadata` → targeted-fetch pattern.
+**Caveats.** Full experience gated on paid seats; daily tool-call limits are real in heavy sessions; `get_design_context` payloads for large frames are token-expensive — use the `get_metadata` → targeted-fetch pattern. The server also exposes **42 tools**, the largest surface in this stack; defer the schemas if your client supports it. Full cost model in [figma-mcp-efficiency.md](figma-mcp-efficiency.md).
 
 ### Framelink — Figma-Context-MCP
 
