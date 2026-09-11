@@ -103,15 +103,24 @@ Upstream ships **two** skill trees with the same 14 names, and which one you get
 | Total `SKILL.md` | 211 KB | **190 KB** |
 | `figma-use/SKILL.md` | 34.6 KB | **23.4 KB** |
 | Extra reference | — | `fig-builder.md`, `critical-rules-deep.md` |
+| Node creation API | standard `figma.create*` | **`$fig` global; `figma.create*` "do not exist"** |
 | Differs from the other tree | — | **8 of 14 skills** |
 
-The figquery variant is built around a `$fig` helper layer and a `query()` node-search API, and it is explicit about why:
+The figquery variant is built around a `$fig` helper layer, and it is explicit about why it prefers a `query()` node search:
 
 > Do not use `findOne`, `findAll`, `findAllWithCriteria`, `findChildren`, `findChild` directly for node searching. They are more verbose, error-prone, and less efficient than `query()`. Additionally, do not use recursion to search.
 
-That is the same performance lever as gotcha #3 above, but promoted from a buried warning into the skill's primary idiom — 11 KB smaller and pointed directly at the most common slow call. The two trees are generated from different upstream plugins (`figma-plugin` vs `figma-plugin-fig-query`) and upstream says **do not hand-edit either**.
+**Do not treat the two trees as interchangeable.** An earlier revision of this document suggested pointing Claude Code at `skills-figquery/` to get the smaller tree. That advice was wrong and has been removed. The figquery tree describes a *different execution environment*, not the same environment in fewer words:
 
-**If the write path is what feels slow in Claude Code, this is the highest-leverage thing in this document:** you are loading the larger, `findAll`-tolerant tree by default, and the leaner `query()`-first tree exists, ships in the same repo, and is one path away. Point a project-local skills directory at `skills-figquery/` instead of `skills/` and re-test. Verify against your own workflow before standardizing — the trees are maintained separately and the figquery one is Cursor-shaped, so treat this as an experiment with a measurable outcome, not a settled recommendation.
+> `$fig` is a global that is responsible for all node creation. [...] Never use `figma.createFrame()`, `figma.createText()` or any `figma.create*` methods. **They do not exist in this environment.**
+
+The default `skills/` tree never mentions `$fig` — not once in 209,893 bytes — and teaches the standard Plugin API those sentences forbid. Loading figquery against a connection that provides the standard environment would instruct the agent to call a global that isn't there and to avoid the methods that are. That is a guaranteed-failure configuration, not a saving.
+
+**This also breaks the "figquery proves skills compress" inference.** `figma-use` is 32% smaller in that tree, but the reduction is mostly explained by the higher-level tool surface making entire sections of hand-taught API mechanics unnecessary — not by denser writing of the same lessons. The tell: `figma-design-to-code` *grew* 32% in the same tree. Only `figma-generate-library` (a phase checklist replacing three redundant restatements, 98 → 61 lines) is clean evidence of prose compression. Citing the tree-size delta as a compression result conflates prose editing with a tool-surface redesign.
+
+What survives: `query()` over `findAll` is sound advice in **both** trees — the default tree documents `node.query()` too, it just buries the performance rationale in a 53 KB gotchas file instead of promoting it to the primary idiom. Prefer `query()` where your environment offers it; don't swap trees to get it.
+
+**Open question, unresolved here:** which environment a given client actually gets. The two trees are generated from different upstream plugins (`figma-plugin` vs `figma-plugin-fig-query`), and `.mcp.json` sends an `X-Figma-Plugin-Bundle` header, which suggests server behaviour keyed to the bundle rather than to the client. Verifying that costs a live write call and a quota unit; it has not been tested for this document.
 
 ---
 
@@ -155,6 +164,12 @@ In order. Stop when the problem goes away — each rung costs more than the one 
 - **Read-only, high-volume, token-sensitive.** Framelink's simplified payload is the design goal, not a compromise.
 - **Bulk variable/token operations.** `figma-console-mcp` has the deeper surface for CRUD at scale; the official server's write tools are aimed at composition, not bulk edits.
 - **No Code Connect coverage.** The official server's fidelity advantage is largely *your components in the output*. Without Code Connect mappings you are paying premium payload for generic markup you'll rewrite anyway. Set up Code Connect first, or use a cheaper server until you have.
+
+---
+
+## Going further
+
+Whether these skills can be *compressed* — and why that is mostly the wrong lever — is its own research stream: **[docs/research/figma-skill-compression/](../docs/research/figma-skill-compression/README.md)**. It measures where the cuttable mass actually is, reads the published evidence skeptically, models retry risk against token saving, and ends with a falsifiable experiment roadmap. It is also the source of the figquery retraction above.
 
 ---
 
