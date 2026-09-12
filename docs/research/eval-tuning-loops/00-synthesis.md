@@ -32,7 +32,7 @@ Doc 05's reference loop is the backbone; the other documents supply the rules at
 | 10 Canary and promote | Generator vN+1 on a live cohort with the same graders; promote by version bump or roll back by pinned SHA | Watch the loop's own vital signs, not just the generator's | Eval owner | 05 §5, §7 |
 | 11 Consider weights | Only when the eval set is stable, ≥1,000 reviewed grades exist, the task is one narrow artifact family, text-level gains have plateaued, and the team can serve and version an open model — Claude itself cannot be tuned | Rewards must be rendered or compiled checks with the rubric term last; stay text-level while the design system changes faster than you can retrain | Eval owner + engineering | 04 §3–§6 |
 
-Two objects hold the loop together, and both are the team's to build because no vendor provides them: the **grade record** (01) with provenance and defect locations, joined to the **prototype ledger** ([design-sdlc 03](../design-sdlc/03-prototype-governance-outside-the-codebase.md)) so every grade has an address.
+Two objects hold the loop together, and both are still the team's to build. **Narrowed 12 September 2026:** vendors now ship *parts* — `claude plugin eval` provides rubric graders and a no-plugin control arm, and Claude Code Review reads a `REVIEW.md` rubric — but neither joins an artifact to a defect class, a fix altitude and whether it recurred, which is the object that matters ([iteration-repair-and-rubrics/06](../iteration-repair-and-rubrics/06-community-practice-and-tooling.md)). The two objects: the **grade record** (01) with provenance and defect locations, joined to the **prototype ledger** ([design-sdlc 03](../design-sdlc/03-prototype-governance-outside-the-codebase.md)) so every grade has an address.
 
 ---
 
