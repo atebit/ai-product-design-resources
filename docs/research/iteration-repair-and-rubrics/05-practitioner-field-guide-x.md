@@ -1,10 +1,38 @@
-# The Practitioner Field Guide to X — What the Timeline Actually Says About Generate → Iterate → Test → Miss → Patch
+# The Practitioner Field Guide — What Can Be Established About Generate → Iterate → Test → Miss → Patch When X Itself Is Unreachable
 
-**Scope:** Document 05 of the iteration-repair-and-rubrics stream, and the one the repo owner asked for by name: *"Look on twitter because that's where everyone is at."* It answers one question — how are people on X/Twitter actually running the loop where AI builds it, they vibe-code a few rounds, they test, something was missed, and they patch — and a second question the first forces: how much of what X says about that is method and how much is marketing. It covers the workflows people describe, how they handle the miss specifically, the rules-file/rubric culture that has grown up around it, the places the timeline genuinely splits, and the viral claims that do not survive checking. It builds on the grading stack in [eval-tuning-loops/01](../eval-tuning-loops/01-grading-generated-prototypes.md), the fix-altitude ladder in [eval-tuning-loops/03](../eval-tuning-loops/03-feeding-grades-back-text-level.md), the surgical-patch mechanics in [prototype-construction/05](../prototype-construction/05-surgical-editing-iteration.md), the guardrail ladder in [design-sdlc/04](../design-sdlc/04-small-model-guardrails.md) and the feedback surfaces in [design-sdlc/02](../design-sdlc/02-feedback-on-code-prototypes-and-flows.md) — none of which is restated. Explicitly out of scope and owned elsewhere in this stream: the taxonomy of misses (doc 01), the mechanics of repair itself (doc 02), and non-X community venues plus the tooling landscape — Reddit, Hacker News, YouTube, newsletters-as-primary-sources, and the products — which belong to doc 06. **Verified live September 2026; every claim links its source; anything that could not be fetched is marked — and in this document that is a large fraction, for a reason §1 states before anything else.**
+**Scope:** Document 05 of the iteration-repair-and-rubrics stream, and the one the repo owner asked for by name: *"Look on twitter because that's where everyone is at."* It answers one question — how are people on X/Twitter actually running the loop where AI builds it, they vibe-code a few rounds, they test, something was missed, and they patch — and a second question the first forces: how much of what X says about that is method and how much is marketing. It covers the workflows people describe, how they handle the miss specifically, the rules-file/rubric culture that has grown up around it, the places the timeline genuinely splits, and the viral claims that do not survive checking. It builds on the grading stack in [eval-tuning-loops/01](../eval-tuning-loops/01-grading-generated-prototypes.md), the fix-altitude ladder in [eval-tuning-loops/03](../eval-tuning-loops/03-feeding-grades-back-text-level.md), the surgical-patch mechanics in [prototype-construction/05](../prototype-construction/05-surgical-editing-iteration.md), the guardrail ladder in [design-sdlc/04](../design-sdlc/04-small-model-guardrails.md) and the feedback surfaces in [design-sdlc/02](../design-sdlc/02-feedback-on-code-prototypes-and-flows.md) — none of which is restated. Explicitly out of scope and owned elsewhere in this stream: the taxonomy of misses (doc 01), the mechanics of repair itself (doc 02), and non-X community venues plus the tooling landscape — Reddit, Hacker News, YouTube, newsletters-as-primary-sources, and the products — which belong to doc 06. **Read the verification ledger immediately below before anything else.** X/Twitter was completely unreachable from this session, so this document is not the field guide the brief asked for. It is the honest remainder: what practitioner practice can be established from the sources that *were* reachable (GitHub, and the Claude Code documentation), what the X-specific layer would add on top, and an explicit list of what a session with X access must go and re-verify. Verified live September 2026; every claim carries an evidence grade; nothing is quoted that was not seen rendered.
+
+---
+
+## ⚠ Verification ledger — read first
+
+**What was attempted and what happened, today, 12 September 2026.**
+
+| Host | Result |
+|---|---|
+| `x.com`, `twitter.com` | `EGRESS_BLOCKED` at the network proxy (`WebFetch`); no connection via `curl` |
+| `nitter.net`, `xcancel.com`, `threadreaderapp.com`, `typefully.com` | Blocked / connection refused. **Every mirror route the brief anticipated failed.** |
+| `reddit.com`, `news.ycombinator.com`, `hn.algolia.com`, `substack.com` | Blocked |
+| `metr.org`, `arxiv.org`, `dora.dev`, `martinfowler.com`, `simonwillison.net`, `en.wikipedia.org`, `agents.md`, `www.anthropic.com` | Blocked |
+| **`github.com`, `raw.githubusercontent.com`, `gist.github.com`** | **Reachable — read in full** |
+| **`code.claude.com`** | **Reachable — read in full** |
+| `WebSearch` | Works. Returns titles, URLs and an index-derived summary. **This is not page verification and is never treated as such below.** |
+
+**Consequences, stated plainly:**
+
+1. **The assignment as briefed — quote real posts verbatim, with dates and engagement — is not achievable in this session.** Not one X post in this document was read on x.com.
+2. **No post date, like count, view count, repost count or reply is reported anywhere in this document.** None was observable.
+3. Where an x.com URL is cited, the artefact I actually saw is a **search-result listing**: a URL paired with the title string the search index returned. X populates that title string from the post's opening text, so it is informative about wording — but it truncates (roughly 250–280 characters), it is the index's copy rather than the page, and I did not open the page. Every such citation is marked **[search result only]** and the reproduced text is presented as *the listing text*, not as a quotation from a post I read.
+4. **No handle, quote, date or number in this document is invented or reconstructed.** Where I expected to find something and could not, §"What a session with X access must verify" names it.
+5. **The pivot that saved the document:** the X discourse about this loop has a large, readable GitHub footprint — rules-file repos, workflow-template repos, review-agent prompts, and the issue threads where the same complaints are argued out. Those are *primary evidence of what practitioners do*, fetchable to the line, and they carry the weight of §3 and §4. The venue is not X, and that is named rather than hidden.
+
+**Rough honest split of this document by evidence strength:** about 40% rests on fully fetched primary artifacts (GitHub repos and files, Claude Code docs); about 45% on search-result listings from x.com that were never opened; about 15% on search-engine summaries that establish nothing and are flagged as leads. Sections 3, 4 and the Recommendations table are the fetched core and are the parts to rely on. Sections 2, 5 and the practitioner table are the search-listing layer and should be re-verified. Section 6 is the weakest and says so.
+
+---
 
 ## Table of Contents
 
-1. [The verification problem, stated up front](#1-the-verification-problem-stated-up-front)
+1. [How this was verified, and what that costs](#1-how-this-was-verified-and-what-that-costs)
 2. [The workflows the timeline describes](#2-the-workflows-the-timeline-describes)
 3. [How X handles the miss, specifically](#3-how-x-handles-the-miss-specifically)
 4. [The rules-file and rubric culture, measured](#4-the-rules-file-and-rubric-culture-measured)
@@ -16,13 +44,13 @@
 10. [Practitioner table](#practitioner-table)
 11. [What the timeline agrees on](#what-the-timeline-agrees-on)
 12. [What the timeline disagrees on](#what-the-timeline-disagrees-on)
-13. [Verification ledger](#verification-ledger)
+13. [What a session with X access must verify](#what-a-session-with-x-access-must-verify)
 14. [Candidate picks for skill-resources](#candidate-picks-for-skill-resources)
 15. [Sources](#sources)
 
 ---
 
-## 1. The verification problem, stated up front
+## 1. How this was verified, and what that costs
 
 **What it is:** X/Twitter could not be fetched at all from this session, and neither could any of the standard mirrors. This section states exactly what that means for the rest of the document, and defines the evidence grade attached to every claim below.
 
@@ -30,28 +58,16 @@
 
 **Key findings:**
 
-Every attempt to open x.com or a mirror returned a hard network refusal, not a paywall or a login wall:
+The blocked-host table is in the ledger at the top of this document and is not repeated. The consequence worth restating here is the one that shaped the research: **the platform resisted verification completely, and so did every secondary mirror.** What survived was GitHub and the Claude Code documentation — which turned out to be less crippling than it sounds, because *the artifacts X practitioners argue about are published on GitHub*. Their rules files, review agents and workflow repos are measurable to the line. The strongest parts of this document (§3 and §4) are strong precisely because they stopped being about what someone said and became about what someone shipped.
 
-| Host attempted | Result today |
-|---|---|
-| `x.com` | `EGRESS_BLOCKED` — "Access to x.com is blocked by the network egress proxy" |
-| `twitter.com`, `nitter.net`, `xcancel.com` | Connection refused at the proxy (HTTP 000 via curl) |
-| `threadreaderapp.com` | `EGRESS_BLOCKED` |
-| `typefully.com` | Connection refused |
-| `metr.org`, `arxiv.org`, `martinfowler.com`, `simonwillison.net`, `en.wikipedia.org`, `agents.md`, `hn.algolia.com`, `www.anthropic.com` | `EGRESS_BLOCKED` |
-| `github.com`, `raw.githubusercontent.com`, `gist.github.com` | **Fetched successfully** |
-| `code.claude.com` | **Fetched successfully** |
+**The evidence grades used throughout.** Every citation below carries exactly one:
 
-So: the platform itself resisted verification completely, and so did the secondary mirrors the brief anticipated. What survived is GitHub and the Claude Code documentation. That turns out to be less crippling than it sounds, because **the artifacts X practitioners argue about are published on GitHub** — their rules files, their review agents, their workflow repos — and those are measurable to the line. The parts of this document that are strongest (§4 especially) are strong precisely because they stopped being about what someone said and became about what someone shipped.
-
-**The evidence grades used throughout.** Every citation below carries one:
-
-| Grade | Meaning | How much to trust it |
+| Grade | What I actually saw | How much to trust it |
 |---|---|---|
-| **[fetched]** | The page was rendered and read in this session today. Quotes are verbatim from that render. | Full — house standard met. |
-| **[search result only]** | The quoted text appeared, word for word, inside a search-result title returned by `WebSearch` today, paired with its x.com URL. The x.com page itself could not be opened. | High for *existence and wording of the opening lines*; **zero** for anything past the truncation, for the date, or for engagement numbers. X renders post text into the HTML `<title>`, which is why these are quotable at all — but they truncate, usually around 250–280 characters. |
-| **[mirror-quoted]** | The quote appears inside a third-party page that *was* fetched (in practice, a GitHub README), which attributes it to a named handle with a link. | Medium — the mirror is a real fetched artifact, but its transcription is unverified and its curator has a point of view. |
-| **[search-summary]** | Only the search engine's own paraphrase. No primary text was seen. | Low — a lead, never a finding. Numbers in this grade are reported as *claimed*, never as established. |
+| **[fetched]** | The page was rendered and read in this session today. Quotation marks around text at this grade mean a genuine verbatim quote from that render. | Full — house standard met. |
+| **[search result only]** | **A search-result listing: a URL paired with the title string the index returned.** The x.com page was never opened. X populates that title string from the post's opening text, so the wording is informative — but it is the index's copy, it truncates at roughly 250–280 characters, and it is not the page. Text reproduced at this grade is presented as *listing text*, never as a quotation from a post I read. | Moderate for the existence of the post and the gist of its opening; **zero** for anything past the truncation, for the date, for authorship beyond the handle in the URL, and for any engagement figure. |
+| **[mirror-quoted]** | A quotation printed inside a third-party page that *was* fetched (in practice, a GitHub README), attributed there to a named handle with a link. | Medium — the mirror is a real fetched artifact, but its transcription is unverified and its curator is an interested party. |
+| **[search-summary]** | Only the search engine's own paraphrase. No primary text of any kind. | Low — a lead, never a finding. Numbers at this grade are reported as *claimed*, never as established. |
 
 **Three things this document therefore refuses to do.** It does not report a single engagement number (likes, views, reposts) for any post, because none was visible on any fetched page. It does not report a post date unless a fetched page stated one. And it does not attribute a position to a handle on the strength of a search engine's summary alone — where that is all there was, the finding says so and the claim is downgraded to "a lead".
 
@@ -379,20 +395,30 @@ Six items. Each appears in at least two independent sources of different kinds, 
 
 ---
 
-## Verification ledger
+## What a session with X access must verify
 
-**Could fetch and did read in full today:** `github.com` and `raw.githubusercontent.com` (all repo pages, READMEs, directory listings and raw rule files cited above); `gist.github.com`; `code.claude.com/docs/en/best-practices` and `/docs/en/overview`.
+The ledger at the top of this document says what was blocked. This section says what to *do* about it: the precise, ordered list a follow-up session with open egress should re-verify or newly obtain. It is written so the next researcher does not have to re-derive the gaps.
 
-**Could not fetch — hard `EGRESS_BLOCKED` or refused connection today:** `x.com`, `twitter.com`, `nitter.net`, `xcancel.com`, `threadreaderapp.com`, `typefully.com`, `metr.org`, `arxiv.org`, `en.wikipedia.org`, `martinfowler.com`, `simonwillison.net`, `agents.md`, `hn.algolia.com`, `www.anthropic.com`, `ruoqijin.com`. Every mirror route the brief anticipated was blocked, not merely rate-limited.
+**Tier 1 — replaces unverified numbers with facts (do these first):**
 
-**Therefore, explicitly:**
+1. **METR.** Open [metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) and [arXiv 2507.09089](https://arxiv.org/abs/2507.09089). Confirm or correct: 16 developers, 246 tasks, −19% with CI **+2% to +39%**, forecast +24%, post-hoc self-estimate +20%, tooling Cursor Pro with Claude 3.5/3.7 Feb–Jun 2025. Then open the [2026-02-24 update](https://metr.org/blog/2026-02-24-uplift-update/) and confirm the follow-up estimate **−18%, CI −38% to +9%**, and METR's own characterisation of the evidence as weak. §6.1 should be rewritten from those pages, not from this document.
+2. **Stanford / Yegor Denisov-Blanch.** Locate the primary presentation or paper and confirm the four-quadrant figures (greenfield-low +30–40%, greenfield-high +10–15%, brownfield-low +15–20%, brownfield-high +0–10%) and the "roughly half of gains consumed by rework" claim. If it holds, it is the most decision-relevant number in this stream and belongs in doc 00's synthesis.
+3. **DORA 2025.** Open [dora.dev/insights/balancing-ai-tensions](https://dora.dev/insights/balancing-ai-tensions/) and confirm the adoption, throughput, stability and trust figures in §6.3.
+4. **Martin Fowler, ["TDD inside the agent loop — theater or actual value?"](https://martinfowler.com/articles/exploring-gen-ai/tdd-in-the-agent-loop.html)** — the single most valuable unfetched source for this stream, and the likely resolution of the §5.3 gap.
 
-- **No X post in this document was read on x.com.** Every X quote marked [search result only] is the text X renders into the page `<title>`, recovered from a search-result listing today, truncated at roughly 250–280 characters. Text after an ellipsis in those quotes was not seen.
-- **No date, like count, view count, repost count or reply is reported for any X post.** None was visible.
-- **Four X posts are [mirror-quoted]** — `@claudeai`, `@petergyang`, `@brewmarkets`, `@Flomerboy` — via a fetched GitHub README that attributes and links them. Its transcription is unverified and its curator is an interested party.
-- **The METR, Stanford/Denisov-Blanch and DORA numbers in §6 are [search-summary] and are not established here.** They are flagged in-line and should be re-verified from primary sources before reuse. The METR 2026 follow-up interval (−38% to +9%) is the most consequential of these and the least verified.
-- **Three things I looked for and could not establish**, stated so nobody assumes they were checked: (a) a citable X post stating "never let the model fix its own bug in the same context" — the principle is well-supported by three other routes (§3.2) but the X formulation eluded me; (b) any citable X statement of the tests-slow-me-down position (§5.3); (c) any published measurement, anywhere, of whether a rules file or a review agent reduces recurrence of a miss (§4, open questions).
-- **Named-practitioner coverage is uneven by construction.** The Claude Code and rules-file communities are well represented because they publish repos. Cursor, Codex, v0/Vercel and Lovable/Bolt practitioners are thin here for the same reason in reverse — their artifacts are hosted products, not fetchable files. Doc 06 owns that gap.
+**Tier 2 — turns [search result only] into real citations:**
+
+5. **Open every x.com URL in the Sources list** and replace each listing string with the actual post text, author display name, and date. Priority order, by how much weight this document puts on them: [@bcherny](https://x.com/bcherny/status/2007179832300581177) (the vanilla-setup position, which anchors §5.1), [@blackgirlbytes](https://x.com/blackgirlbytes/status/2011200705709949348) and [@nicopreme](https://x.com/nicopreme/status/2013784416234152452) (the two incompatible Ralph definitions, which anchor §5.5), [@nyk_builderz](https://x.com/nyk_builderz/status/2077020269474894222) (the critique-loop position and the eight-stage loop attributed to the rest of that thread, currently [search-summary]), [@beyang](https://x.com/beyang/status/1927829076192153746), [@dexhorthy](https://x.com/dexhorthy/status/2033392483674264044).
+6. **Read the replies, not just the posts.** Every [search result only] citation here is a thread *opening*. The technical argument on X lives in replies and quote-posts, which a search index does not expose at all. Expect the disagreements in §5 to be sharper and better-evidenced there than this document can show.
+7. **Verify the [mirror-quoted] four** — [@claudeai](https://x.com/claudeai/status/2045156267690213649), [@petergyang](https://x.com/petergyang/status/2045527271650558383), [@brewmarkets](https://x.com/brewmarkets/status/2045175784554283228), [@Flomerboy](https://x.com/Flomerboy/status/2045162321589252458) — against the posts themselves, and confirm or drop the "Ryan Mather / Anthropic insider" identification, which is the mirror's claim and not mine.
+
+**Tier 3 — three things I looked for and could not establish at all. State them as open, not as absent:**
+
+8. **A citable X post stating "never let the model fix its own bug in the same context."** The principle is well-supported from three other directions (§3.2) but its X formulation eluded me. If it does not exist, say so — it would mean the norm is vendor-doctrine that the timeline absorbed without ever arguing.
+9. **Any citable X statement of the tests-slow-me-down position** (§5.3). Its absence here is very likely a search artifact, and the disagreements table is lopsided until it is found.
+10. **Any published measurement, anywhere, that a rules file or a review agent reduces recurrence of a class of miss.** I found none. If a follow-up also finds none, that absence is itself a headline finding for this stream, and the strongest argument for building the instrumented grade record in [eval-tuning-loops/01 §4](../eval-tuning-loops/01-grading-generated-prototypes.md).
+
+**Tier 4 — coverage gaps created by the GitHub pivot.** Practitioner coverage in this document is uneven *by construction*: the Claude Code and rules-file communities are well represented because they publish repos; Cursor, Codex, v0/Vercel and Lovable/Bolt practitioners are thin for the mirror-image reason — their artifacts are hosted products, not fetchable files. A session with X access should deliberately over-sample those four communities to correct the bias. Doc 06 owns the tooling side of that gap.
 
 ---
 
