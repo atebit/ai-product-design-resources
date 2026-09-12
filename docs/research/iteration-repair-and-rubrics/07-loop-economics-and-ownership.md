@@ -6,7 +6,7 @@
 
 **Explicitly out of scope, with owners:** the taxonomy of miss classes (doc 01); repair mechanics, rollback, and surgical patching (doc 02, and [prototype-construction 05](../prototype-construction/05-surgical-editing-iteration.md)); how to phrase a criterion (doc 03); what craft criteria contain (doc 04); tools and harnesses (doc 06); eval-set management, CI gating, and multi-person change control ([eval-tuning-loops 05](../eval-tuning-loops/05-loop-architecture-and-governance.md)); grading mechanics and judge calibration ([eval-tuning-loops 01](../eval-tuning-loops/01-grading-generated-prototypes.md) and [02](../eval-tuning-loops/02-reviewing-grades-and-human-calibration.md)).
 
-> **Verification note — read this before trusting any number below.** Verified live 12 September 2026. This session's outbound egress was restricted by organization policy: `metr.org`, `arxiv.org`, `dora.dev`, `x.com`, `hamel.dev`, `pmc.ncbi.nlm.nih.gov`, `survey.stackoverflow.co`, `gitclear.com`, `substack.com`, `news.ycombinator.com`, `reddit.com` and most journal and vendor domains all returned `403` at the CONNECT stage and could not be fetched. **Two pages were fetched in full** ([Claude Code cost docs](https://code.claude.com/docs/en/costs), [Google Cloud's 2025 DORA announcement](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report)), and one first-party file was read from disk (the bundled `claude-api` skill's model/pricing table, cached 2026-06-24). **Every other claim below is marked `[snippet]` and rests on a search-result summary only — the underlying page did not load and was not independently verified.** Where a number matters to an argument, the argument is written so you can see what breaks if the number is wrong. Practitioner posts on X could not be retrieved at all: `x.com` is blocked and no thread-mirror domain resolved, so **no tweet is quoted in this document**, and the two practitioner claims that appear are marked as second-hand summaries of blog posts that were themselves only seen as snippets.
+> **Verification note — read this before trusting any number below.** Verified live 12 September 2026. This session's outbound egress was restricted by organization policy: `metr.org`, `arxiv.org`, `dora.dev`, `x.com`, `hamel.dev`, `pmc.ncbi.nlm.nih.gov`, `survey.stackoverflow.co`, `gitclear.com`, `substack.com`, `news.ycombinator.com`, `reddit.com` and most journal and vendor domains all returned `403` at the CONNECT stage and could not be fetched. **Two pages were fetched in full** ([Claude Code cost docs](https://code.claude.com/docs/en/costs), [Google Cloud's 2025 DORA announcement](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report)), and one first-party file was read from disk (the bundled `claude-api` skill's model/pricing table, cached 2026-06-24). **Every other claim below is marked `[search summary]` and rests on a search-result summary only — the underlying page did not load and was not independently verified.** Where a number matters to an argument, the argument is written so you can see what breaks if the number is wrong. Practitioner posts on X could not be retrieved at all: `x.com` is blocked and no thread-mirror domain resolved, so **no tweet is quoted in this document**, and the two practitioner claims that appear are marked as second-hand summaries of blog posts that were themselves only seen as search summarys.
 
 ## Table of Contents
 
@@ -85,7 +85,7 @@ The consequence for this document is a coupling that determines everything in §
 
 That is the [design-sdlc 04 guardrail ladder](../design-sdlc/04-small-model-guardrails.md) and the [eval-tuning-loops 03 fix-altitude ladder](../eval-tuning-loops/03-feeding-grades-back-text-level.md) restated as a cost model rather than a reliability model. A rubric that grows only in its hand-checked half is not a ratchet; it is a tax.
 
-**Open questions:** No public dataset gives rounds-per-prototype or minutes-per-round for *design* work with an agent. The Claude Code figures are per developer-day, not per task; SWE-bench cost-per-instance figures exist but measure a different activity and the leaderboard numbers found in search were inconsistent across sources by an order of magnitude [snippet], so none are quoted here. **The single most useful measurement a practitioner could publish is a histogram of rounds-to-acceptance for their own prototypes.** It costs one integer per prototype (§7).
+**Open questions:** No public dataset gives rounds-per-prototype or minutes-per-round for *design* work with an agent. The Claude Code figures are per developer-day, not per task; SWE-bench cost-per-instance figures exist but measure a different activity and the leaderboard numbers found in search were inconsistent across sources by an order of magnitude [search summary], so none are quoted here. **The single most useful measurement a practitioner could publish is a histogram of rounds-to-acceptance for their own prototypes.** It costs one integer per prototype (§7).
 
 ---
 
@@ -111,9 +111,9 @@ The most-cited number in this area is METR's randomized controlled trial of expe
 | Belief after | developers estimated **−20%** completion time |
 | **Measured** | **+19% completion time** — i.e. AI access made them *slower* |
 
-All of the above is [snippet] — `metr.org` and `arxiv.org` were both blocked; the figures come from search-result summaries of [metr.org's July 2025 post](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) and [arXiv 2507.09089](https://arxiv.org/abs/2507.09089). **The confidence interval could not be retrieved** (the search summary points to the paper's Appendix D without reproducing it), so the effect size here is a point estimate with no reported precision.
+All of the above is [search summary] — `metr.org` and `arxiv.org` were both blocked; the figures come from search-result summaries of [metr.org's July 2025 post](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) and [arXiv 2507.09089](https://arxiv.org/abs/2507.09089). **The confidence interval could not be retrieved** (the search summary points to the paper's Appendix D without reproducing it), so the effect size here is a point estimate with no reported precision.
 
-The caveats matter more than the headline, and the strongest one is METR's own. In a February 2026 update, METR states the finding **"is now outdated"**, that "speedups now seem likely," and that their newer experiment's data is unreliable because of selection effects: a rising share of developers declined to participate rather than work without AI, **30–50% of developers reported not submitting some tasks** for that reason, the pay rate was cut from **$150/hr to $50/hr**, and time-on-task is unmeasurable for developers running several agents concurrently [snippet — [metr.org uplift update](https://metr.org/blog/2026-02-24-uplift-update/) and its [Substack mirror](https://metr.substack.com/p/2026-02-24-uplift-update), both blocked].
+The caveats matter more than the headline, and the strongest one is METR's own. In a February 2026 update, METR states the finding **"is now outdated"**, that "speedups now seem likely," and that their newer experiment's data is unreliable because of selection effects: a rising share of developers declined to participate rather than work without AI, **30–50% of developers reported not submitting some tasks** for that reason, the pay rate was cut from **$150/hr to $50/hr**, and time-on-task is unmeasurable for developers running several agents concurrently [search summary — [metr.org uplift update](https://metr.org/blog/2026-02-24-uplift-update/) and its [Substack mirror](https://metr.substack.com/p/2026-02-24-uplift-update), both blocked].
 
 **How to use it honestly.** The 19% slowdown is not evidence that AI makes people slower in September 2026; its authors say so. What survives, and what is directly relevant to this document, is the *perception gap*: a 39-percentage-point spread between believed (−20%) and measured (+19%) speed, in an RCT, among experienced people working in their own code. **A practitioner's felt sense of whether the loop is working is not evidence.** That is the entire justification for §7.
 
@@ -126,13 +126,13 @@ The 2025 DORA report (nearly 5,000 respondents plus 100+ hours of qualitative da
 - AI adoption "continues to have a **negative relationship with software delivery stability**," because it accelerates change volume without the control systems (automated testing, version control, fast feedback) that absorb it.
 - The central claim: "AI doesn't fix a team; it amplifies what's already there."
 
-Secondary coverage of the same report adds that AI correlates with "more change failures, increased rework, and longer cycle times to resolve issues" and that AI is "exposing downstream bottlenecks in testing, code review, and quality assurance" [snippet]. DORA published a follow-up, *ROI of AI-assisted Software Development* (2026.01), whose landing page on cloud.google.com returned no usable content when fetched; its summarized thesis is that returns come from the surrounding system rather than the tools [snippet].
+Secondary coverage of the same report adds that AI correlates with "more change failures, increased rework, and longer cycle times to resolve issues" and that AI is "exposing downstream bottlenecks in testing, code review, and quality assurance" [search summary]. DORA published a follow-up, *ROI of AI-assisted Software Development* (2026.01), whose landing page on cloud.google.com returned no usable content when fetched; its summarized thesis is that returns come from the surrounding system rather than the tools [search summary].
 
 **This is the strongest argument in the document for running the loop at all**, and it is worth stating plainly: DORA's result says the *marginal* output of AI-assisted generation lands on an under-built verification step. A rubric that ratchets is exactly a verification step being built. DORA's result also says the loop will help a practitioner who already has structure and will not rescue one who does not.
 
 ### 2.3 Rework and duplication: the shape of what escapes
 
-Two independent lines suggest what actually escapes into artifacts, both [snippet]:
+Two independent lines suggest what actually escapes into artifacts, both [search summary]:
 
 | Signal | Number | Source |
 |---|---|---|
@@ -148,7 +148,7 @@ GitClear is a vendor with a product that measures exactly the thing its reports 
 
 ### 2.4 The cost-of-late-defects claim you should not lean on
 
-The reflexive justification for catching things earlier is Boehm's 1:10:100 cost-of-change curve. **Do not cite it.** The commonly reproduced "IBM Systems Sciences Institute" table has no published study behind it: the trail runs to Roger Pressman's textbook, which attributes it to internal 1981 course notes, and no dataset has ever been produced — the case is laid out in Laurent Bossavit's *[The Leprechauns of Software Engineering](https://books.google.com/books/about/The_Leprechauns_of_Software_Engineering.html?id=6LcpBgAAQBAJ)* [snippet]. The direction (late fixes cost more) is supported; the multipliers are folklore. **§3 therefore does not use a phase multiplier at all** — it uses only minutes you can time with a stopwatch, which is the point.
+The reflexive justification for catching things earlier is Boehm's 1:10:100 cost-of-change curve. **Do not cite it.** The commonly reproduced "IBM Systems Sciences Institute" table has no published study behind it: the trail runs to Roger Pressman's textbook, which attributes it to internal 1981 course notes, and no dataset has ever been produced — the case is laid out in Laurent Bossavit's *[The Leprechauns of Software Engineering](https://books.google.com/books/about/The_Leprechauns_of_Software_Engineering.html?id=6LcpBgAAQBAJ)* [search summary]. The direction (late fixes cost more) is supported; the multipliers are folklore. **§3 therefore does not use a phase multiplier at all** — it uses only minutes you can time with a stopwatch, which is the point.
 
 **Open questions:** Nobody has run METR's design on *design* work, where the artifact is judged by eye rather than by tests. Whether the perception gap is larger or smaller when the output is visual is unknown and would be a cheap study for a design org with ten designers.
 
@@ -189,7 +189,7 @@ The worked rows are in **[Deliverable A](#deliverable-a--break-even-table)**. Th
 
 1. **The prose rule wins on naive arithmetic — which is exactly why rubrics bloat.** Break-even at ~1–2 recurrences. Every individual decision to add a line is correct under this model. The model is incomplete; §4 completes it.
 2. **A criterion you check by hand is the worst of both worlds.** It has a build cost *and* a recurring cost, and its recurring cost scales with how often you iterate. Base case (verify at session boundaries, ~15 sessions/month): break-even at about **1 recurrence/month**. Pathological case (verify after every round, ~180 rounds/month): break-even at about **10.5 recurrences/month**, which almost nothing reaches. **The largest single economy available in the whole loop is batching verification to session boundaries instead of round boundaries** — worth more than any tool choice.
-3. **Visual-regression and LLM-judge criteria are the two things small teams most often over-buy.** Both need `R` above roughly 3–4 occurrences/month before they are net positive at all. This matches the only external corroboration available: test-automation ROI write-ups put typical enterprise break-even at **6–9 months**, falling to **3–4 months** for high-frequency regression on stable targets and rising to **12–18 months** for infrequent runs with high maintenance, with **execution frequency named as the single biggest driver** [snippet — vendor blogs; treat as folklore-grade, but the *direction* is consistent with the model].
+3. **Visual-regression and LLM-judge criteria are the two things small teams most often over-buy.** Both need `R` above roughly 3–4 occurrences/month before they are net positive at all. This matches the only external corroboration available: test-automation ROI write-ups put typical enterprise break-even at **6–9 months**, falling to **3–4 months** for high-frequency regression on stable targets and rising to **12–18 months** for infrequent runs with high maintenance, with **execution frequency named as the single biggest driver** [search summary — vendor blogs; treat as folklore-grade, but the *direction* is consistent with the model].
 
 **Open questions:** `p` for a prose criterion in a design rubric has no public measurement. Doc 06 owns the instruction-following evidence; §4 turns that gap into a one-afternoon experiment.
 
@@ -207,13 +207,13 @@ The worked rows are in **[Deliverable A](#deliverable-a--break-even-table)**. Th
 
 | Finding | Number | Source |
 |---|---|---|
-| Best frontier models at maximum instruction density (500 keyword-inclusion instructions) | **68%** accuracy; distinct threshold / linear / exponential decay patterns by model | IFScale [arXiv 2507.11538](https://arxiv.org/pdf/2507.11538) [snippet] |
-| 2026 replication | strongest frontier models near-perfect at N=500, holding accuracy "through N in the thousands" | Arize replication [snippet] — **this materially weakens the density argument for current models** |
-| 24 verifier-checked instructions, three production models | follow rate falls from **~96% to as low as 20%**; one "output JSON" constraint jointly unsatisfiable with nine others | Instruction Stacking Collapse [arXiv 2608.02639](https://arxiv.org/abs/2608.02639) [snippet] |
-| Instruction files in the wild: 1,867 repos, 247,694 instructions | median file **39 instructions**; instruction counts **+226% on average**; old rules **almost never deleted** | Chakrabarti, summarized in [wonderingaboutai](https://wonderingaboutai.substack.com/p/how-to-stop-your-claudemd-file-from) [snippet — second-hand] |
-| 64 popular repos, 84 instruction files, 2,116 statements | evolution "driven mainly by small incremental additions rather than large-scale deletions"; 67.4% of context files edited in multiple commits | Agent READMEs [arXiv 2511.12884](https://arxiv.org/html/2511.12884v1) [snippet] |
+| Best frontier models at maximum instruction density (500 keyword-inclusion instructions) | **68%** accuracy; distinct threshold / linear / exponential decay patterns by model | IFScale [arXiv 2507.11538](https://arxiv.org/pdf/2507.11538) [search summary] |
+| 2026 replication | strongest frontier models near-perfect at N=500, holding accuracy "through N in the thousands" | Arize replication [search summary] — **this materially weakens the density argument for current models** |
+| 24 verifier-checked instructions, three production models | follow rate falls from **~96% to as low as 20%**; one "output JSON" constraint jointly unsatisfiable with nine others | Instruction Stacking Collapse [arXiv 2608.02639](https://arxiv.org/abs/2608.02639) [search summary] |
+| Instruction files in the wild: 1,867 repos, 247,694 instructions | median file **39 instructions**; instruction counts **+226% on average**; old rules **almost never deleted** | Chakrabarti, summarized in [wonderingaboutai](https://wonderingaboutai.substack.com/p/how-to-stop-your-claudemd-file-from) [search summary — second-hand] |
+| 64 popular repos, 84 instruction files, 2,116 statements | evolution "driven mainly by small incremental additions rather than large-scale deletions"; 67.4% of context files edited in multiple commits | Agent READMEs [arXiv 2511.12884](https://arxiv.org/html/2511.12884v1) [search summary] |
 | First-party guidance | "Aim to keep CLAUDE.md under 200 lines by including only essentials" | [Claude Code cost docs](https://code.claude.com/docs/en/costs) [**fetched**] |
-| Practitioner folk number | "once you write more than 60 rules, Claude quietly starts ignoring them" | second-hand summary of blog posts [snippet — **unverified, no primary source loaded**] |
+| Practitioner folk number | "once you write more than 60 rules, Claude quietly starts ignoring them" | second-hand summary of blog posts [search summary — **unverified, no primary source loaded**] |
 
 Note the tension, and do not paper over it: the Arize replication says density stopped being the binding constraint for frontier models, while the stacking-collapse result says *conflicting* constraints still collapse at n=24. **These are consistent if the tax is driven by interaction between criteria, not by count.** A design rubric of independent, positively-stated, artifact-level criteria should sit near the benign end; a rubric full of conditionals, exceptions and near-duplicates sits near the collapse end. That is a claim doc 03's phrasing guidance can act on.
 
@@ -232,8 +232,8 @@ At `a₀ = 0.95`, the optimum rubric size is:
 |---|---|---|
 | 0.002 | **≈ 238** | Anthropic's "under 200 lines" [fetched] |
 | 0.005 | ≈ 95 | — |
-| 0.008 | **≈ 60** | the practitioner "~60 rules" claim [snippet, unverified] |
-| 0.020 | **≈ 24** | the instruction-stacking collapse point [snippet] |
+| 0.008 | **≈ 60** | the practitioner "~60 rules" claim [search summary, unverified] |
+| 0.020 | **≈ 24** | the instruction-stacking collapse point [search summary] |
 
 **The three numbers everyone quotes are the same model at three values of one parameter.** That reframing is the useful part: stop arguing about whether the cap is 60 or 200 and start measuring `k` for *your* rubric, because `k` is a property of how your criteria are written, not of the model.
 
@@ -270,22 +270,22 @@ The dangerous pair is grader × generator. The dangerous *loop* is rubric owner 
 
 | Finding | Number | Source |
 |---|---|---|
-| **Self-attribution bias in model monitors** — a model evaluating an action framed as *its own* under-reports risk and incorrectness relative to the same action presented fresh in a user turn. In one setting it made the monitor **5× more likely** to approve a code patch that followed a prompt injection. Reviewer severity in self-evaluation showed a **2.8-point mean spread** between strictest and most lenient reviewer, and the bias was mostly an across-the-board reviewer effect rather than agent-specific self-favouring | 5×; 2.8 points | [arXiv 2603.04582](https://arxiv.org/abs/2603.04582), Khullar, Hopkins, Wang, Roger, 4 Mar 2026 [snippet] |
-| **IKEA effect** — labor raises valuation of one's own output; participants valued their amateur creations similarly to experts' work and expected others to agree. Effect disappears when the task is not completed | four studies | Norton, Mochon & Ariely, *J. Consumer Psychology* 22(3):453–460, 2012 [snippet] |
-| **Blinding changes review outcomes measurably** — single-blind reviewers were **1.76×** more likely to recommend acceptance for famous authors and **1.67×** for top institutions; they also bid on **22% fewer** papers | 1.76× / 1.67× | Tomkins, Zhang & Heavlin, WSDM 2017 / [PNAS 2017](https://www.pnas.org/doi/10.1073/pnas.1707323114) [snippet] |
-| **Code review bias is reported by practitioners** — 41.18% of respondents had experienced a biased code review (maintainers 43.14%, contributors 40.11%) | 41.18% | [arXiv 2504.18407](https://arxiv.org/pdf/2504.18407) [snippet] |
-| **Observation inflates adherence (Hawthorne)** — hand-hygiene compliance under overt vs covert observation differed by **7–16pp before 2009 and 30–34pp after**; by role, **30pp** (nurses) vs 11pp (physicians); by setting, **41pp** (outpatient) vs 11pp (ICU); event rates ~**3× higher** within eyesight of an auditor | up to 34pp | multiple studies incl. [PubMed 25002555](https://pubmed.ncbi.nlm.nih.gov/25002555/), [PMC6090841](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6090841/) [snippet] |
+| **Self-attribution bias in model monitors** — a model evaluating an action framed as *its own* under-reports risk and incorrectness relative to the same action presented fresh in a user turn. In one setting it made the monitor **5× more likely** to approve a code patch that followed a prompt injection. Reviewer severity in self-evaluation showed a **2.8-point mean spread** between strictest and most lenient reviewer, and the bias was mostly an across-the-board reviewer effect rather than agent-specific self-favouring | 5×; 2.8 points | [arXiv 2603.04582](https://arxiv.org/abs/2603.04582), Khullar, Hopkins, Wang, Roger, 4 Mar 2026 [search summary] |
+| **IKEA effect** — labor raises valuation of one's own output; participants valued their amateur creations similarly to experts' work and expected others to agree. Effect disappears when the task is not completed | four studies | Norton, Mochon & Ariely, *J. Consumer Psychology* 22(3):453–460, 2012 [search summary] |
+| **Blinding changes review outcomes measurably** — single-blind reviewers were **1.76×** more likely to recommend acceptance for famous authors and **1.67×** for top institutions; they also bid on **22% fewer** papers | 1.76× / 1.67× | Tomkins, Zhang & Heavlin, WSDM 2017 / [PNAS 2017](https://www.pnas.org/doi/10.1073/pnas.1707323114) [search summary] |
+| **Code review bias is reported by practitioners** — 41.18% of respondents had experienced a biased code review (maintainers 43.14%, contributors 40.11%) | 41.18% | [arXiv 2504.18407](https://arxiv.org/pdf/2504.18407) [search summary] |
+| **Observation inflates adherence (Hawthorne)** — hand-hygiene compliance under overt vs covert observation differed by **7–16pp before 2009 and 30–34pp after**; by role, **30pp** (nurses) vs 11pp (physicians); by setting, **41pp** (outpatient) vs 11pp (ICU); event rates ~**3× higher** within eyesight of an auditor | up to 34pp | multiple studies incl. [PubMed 25002555](https://pubmed.ncbi.nlm.nih.gov/25002555/), [PMC6090841](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6090841/) [search summary] |
 
-The self-attribution result is the most directly actionable finding in this document, because of *how* the bias is triggered: the paper's mechanism is that the action "is presented in a previous or in the same assistant turn instead of being presented by the user in a user turn" [snippet]. That is not a property of who the reviewer is; it is a property of **where the artifact sits in the conversation**. Which means the fix is free.
+The self-attribution result is the most directly actionable finding in this document, because of *how* the bias is triggered: the paper's mechanism is that the action "is presented in a previous or in the same assistant turn instead of being presented by the user in a user turn" [search summary]. That is not a property of who the reviewer is; it is a property of **where the artifact sits in the conversation**. Which means the fix is free.
 
 ### 5.3 Minimum viable separation — a ladder ordered by cost
 
 | Rung | Separation | Cost | Evidence it helps | When to use |
 |---|---|---|---|---|
 | 0 | Grade in the same session that built it | — | **this is the failure mode**, not a rung | never |
-| 1 | **Context separation** — open a fresh session, paste/point at the artifact only, never the build transcript, and ask for a verdict against the rubric | ~0; one command | self-attribution bias is triggered by same-turn/prior-turn attribution [snippet, 5× effect] | **every prototype** — this is the default |
-| 2 | **Time separation** — grade tomorrow, or after a break long enough to lose the build context | a day of latency | IKEA effect is a valuation-of-own-labor effect [snippet]; no direct measurement for delay | anything you will show someone |
-| 3 | **Artifact blinding** — grade screenshots or output with the round number, variant name and your own instructions stripped | 5 min of file hygiene | blinding measurably moves review outcomes (1.76×) [snippet] | A/B between generator versions; any time you have a favourite |
+| 1 | **Context separation** — open a fresh session, paste/point at the artifact only, never the build transcript, and ask for a verdict against the rubric | ~0; one command | self-attribution bias is triggered by same-turn/prior-turn attribution [search summary, 5× effect] | **every prototype** — this is the default |
+| 2 | **Time separation** — grade tomorrow, or after a break long enough to lose the build context | a day of latency | IKEA effect is a valuation-of-own-labor effect [search summary]; no direct measurement for delay | anything you will show someone |
+| 3 | **Artifact blinding** — grade screenshots or output with the round number, variant name and your own instructions stripped | 5 min of file hygiene | blinding measurably moves review outcomes (1.76×) [search summary] | A/B between generator versions; any time you have a favourite |
 | 4 | **Anchor set** — 3–5 frozen past artifacts with known verdicts, re-graded at the start of every grading session, to detect your own drift | ~10 min/week | calibration practice; see [eval-tuning-loops 02](../eval-tuning-loops/02-reviewing-grades-and-human-calibration.md) which owns this | weekly |
 | 5 | **Cross-family machine grader** — the judge model is from a different family than the generator | tokens | self-preference bias table in [eval-tuning-loops 01](../eval-tuning-loops/01-grading-generated-prototypes.md); ladder in [design-sdlc 04](../design-sdlc/04-small-model-guardrails.md) | when you have a judge at all |
 | 6 | **Second pair of eyes, sampled** — one other human on 1-in-10 prototypes, and on **every** promotion candidate | someone else's 15 min | the only rung that breaks the single-observer loop | weekly-to-monthly |
@@ -316,12 +316,12 @@ Three cheap rules, none of which need a second person:
 
 | Finding | Number | Source |
 |---|---|---|
-| Pooled WHO Surgical Safety Checklist compliance across studies | **73%** (95% CI 62–85) | meta-analysis, [BMC Health Serv Res 2025](https://link.springer.com/article/10.1186/s12913-025-12569-0) [snippet] |
-| By phase | Sign In **76%**, Time Out **61%**, Sign Out **62%** | same [snippet] |
-| One academic centre, by phase | Team Time Out **96–100%**, Team **Sign Out 22%** | [PMC6419440](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6419440/) [snippet] |
-| Effect of a targeted educational intervention | **58.4% → 78.1%** | [PMC12385942](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12385942/) [snippet] |
-| Airline flight crews: unintentional SOP non-compliance | "slightly more often than **twice per flight**" | LOSA Collaborative / [ICAO Doc 9803](https://losacollaborative.com/wp-content/uploads/2021/02/ICAO-Document-9803-LOSA.pdf) [snippet] |
-| Normalization of deviance in aviation, canonical example | "checklists being completed from memory instead of line by line" | [Flight Safety Foundation](https://flightsafety.org/asw-article/normalization-of-deviance/) [snippet] |
+| Pooled WHO Surgical Safety Checklist compliance across studies | **73%** (95% CI 62–85) | meta-analysis, [BMC Health Serv Res 2025](https://link.springer.com/article/10.1186/s12913-025-12569-0) [search summary] |
+| By phase | Sign In **76%**, Time Out **61%**, Sign Out **62%** | same [search summary] |
+| One academic centre, by phase | Team Time Out **96–100%**, Team **Sign Out 22%** | [PMC6419440](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6419440/) [search summary] |
+| Effect of a targeted educational intervention | **58.4% → 78.1%** | [PMC12385942](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12385942/) [search summary] |
+| Airline flight crews: unintentional SOP non-compliance | "slightly more often than **twice per flight**" | LOSA Collaborative / [ICAO Doc 9803](https://losacollaborative.com/wp-content/uploads/2021/02/ICAO-Document-9803-LOSA.pdf) [search summary] |
+| Normalization of deviance in aviation, canonical example | "checklists being completed from memory instead of line by line" | [Flight Safety Foundation](https://flightsafety.org/asw-article/normalization-of-deviance/) [search summary] |
 
 **Apply this carefully, not by analogy alone.** Surgery and aviation differ from solo prototyping in every way that matters for motivation: legal mandate, a second crew member, audit, and lethal consequences. What transfers is not the compliance *rate* but the **shape of the decay**: in both fields, adherence is highest at the step that gates starting work and lowest at the step that happens after the work is done, when the pressure that created the checklist has passed. In the WHO data that is Sign Out — 22% in one centre against 96–100% for Time Out in the same theatre, by the same people, minutes apart.
 
@@ -369,7 +369,7 @@ In order, first to go:
 | **Repeat-offence rate** | share of this week's misses whose class **already has a criterion** | leading | **yes** — one fraction | **the falsification test for the loop.** If a class has a criterion and still recurs, the criterion is not working. This is the single most informative number here |
 | **Rounds to acceptance** | repair rounds before the prototype is shown to a human | leading | **yes** — one integer | the cost side; a rising median means the generator or the brief is wrong, not the rubric |
 | **Misses per class** | the taxonomy histogram | leading | needs doc 01's taxonomy | where to spend the next hour of check-building |
-| **Escape rate to the human test** | misses the automated tier did not catch ÷ total misses | lagging | only with logging | how much of the rubric is actually machine-enforced. General QA benchmarks put "escaped defects" under 10% as excellent and over 40% as a broken process [snippet — vendor KPI pages, folklore-grade; the *concept* is standard, the thresholds are not] |
+| **Escape rate to the human test** | misses the automated tier did not catch ÷ total misses | lagging | only with logging | how much of the rubric is actually machine-enforced. General QA benchmarks put "escaped defects" under 10% as excellent and over 40% as a broken process [search summary — vendor KPI pages, folklore-grade; the *concept* is standard, the thresholds are not] |
 | **Criterion hit rate** | times a criterion fired ÷ times it could have | leading | no | which criteria are load-bearing |
 | **Criterion precision** | fired-and-correct ÷ fired | leading | partially | the false-positive load `f` in §3 |
 | **Canary criterion fired?** | binary (§4.2) | leading | **yes** — one grep | whether the rubric is still being read at all |
@@ -382,11 +382,11 @@ In order, first to go:
 
 | Trap | How it bites here | Evidence | Counter-move |
 |---|---|---|---|
-| **Regression to the mean** | You start the rubric the week after a disaster. The next week is better because extreme weeks are partly luck. In healthcare's Hospital Readmissions Reduction Program, improvement at initially below-mean hospitals was attributed primarily to **chance rather than quality change** [snippet, [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC3538092/)] | selecting on the extreme guarantees an apparent effect | Do not baseline on your worst week. Collect ≥8 pre-period points before changing anything, or accept the confound and **say so in writing** |
-| **Under-powered eyeballing** | Three good prototypes feel like a trend | run-chart rules: a **shift is 6+ consecutive points on one side of the median**; you need **≥12, preferably 20+** points before shift rules apply; the 6-point rule signals on random data no more than ~5% of the time for n=12–20 | Perla, Provost & Murray, *BMJ Qual Saf* 2011; simulation study [PLOS ONE 2014](https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0113825) [snippet] | Plot a run chart. Freeze the median from the first 12 points. Only call a change on a shift |
-| **Changing the generator mid-measurement** | Model swaps and harness updates are frequent and not under your control. Anthropic gives **at least 60 days' notice** before retirement; Sonnet 3.5 was noticed 2025-08-13 and retired 2026-01-05 [snippet]; the bundled skill's local table shows Opus 4.1 retiring 2026-08-05 and Haiku 3 on 2026-04-19 [read locally] | every swap resets the baseline | Stamp model id, harness version and rubric version on every row. **Annotate the chart and restart the median at a swap** |
+| **Regression to the mean** | You start the rubric the week after a disaster. The next week is better because extreme weeks are partly luck. In healthcare's Hospital Readmissions Reduction Program, improvement at initially below-mean hospitals was attributed primarily to **chance rather than quality change** [search summary, [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC3538092/)] | selecting on the extreme guarantees an apparent effect | Do not baseline on your worst week. Collect ≥8 pre-period points before changing anything, or accept the confound and **say so in writing** |
+| **Under-powered eyeballing** | Three good prototypes feel like a trend | run-chart rules: a **shift is 6+ consecutive points on one side of the median**; you need **≥12, preferably 20+** points before shift rules apply; the 6-point rule signals on random data no more than ~5% of the time for n=12–20 | Perla, Provost & Murray, *BMJ Qual Saf* 2011; simulation study [PLOS ONE 2014](https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0113825) [search summary] | Plot a run chart. Freeze the median from the first 12 points. Only call a change on a shift |
+| **Changing the generator mid-measurement** | Model swaps and harness updates are frequent and not under your control. Anthropic gives **at least 60 days' notice** before retirement; Sonnet 3.5 was noticed 2025-08-13 and retired 2026-01-05 [search summary]; the bundled skill's local table shows Opus 4.1 retiring 2026-08-05 and Haiku 3 on 2026-04-19 [read locally] | every swap resets the baseline | Stamp model id, harness version and rubric version on every row. **Annotate the chart and restart the median at a swap** |
 | **The rubric changing under you** | Criteria drift — grading teaches you what the criteria should have been | EvalGen, covered in [eval-tuning-loops 05 §6](../eval-tuning-loops/05-loop-architecture-and-governance.md) | Freeze the rubric for the measurement window, or version it and re-baseline. §5.4 rule 3 |
-| **Hawthorne, on yourself** | Self-reported adherence is not adherence. Overt vs covert observation moved hand-hygiene compliance by up to **34 percentage points** [snippet] | you are never covertly observed, so your adherence is simply unmeasured | Derive adherence from artifacts — commit log, session log, the file's own git history — never from memory |
+| **Hawthorne, on yourself** | Self-reported adherence is not adherence. Overt vs covert observation moved hand-hygiene compliance by up to **34 percentage points** [search summary] | you are never covertly observed, so your adherence is simply unmeasured | Derive adherence from artifacts — commit log, session log, the file's own git history — never from memory |
 
 A sixth, specific to this loop and unsupported by any literature found: **denominator drift.** As you get better at briefing, prototypes get smaller and more scoped, so misses-per-prototype falls with no quality change at all. Record a crude size proxy (screens × states) next to the miss count.
 
@@ -412,10 +412,10 @@ At 2–4 prototypes a week, twelve points takes **3–6 weeks**. Cost: two integ
 
 | Failure | Mechanism | Evidence | Detection signal | Corrective move |
 |---|---|---|---|---|
-| **Rubric bloat past the read threshold** | criteria accrete, nothing retires, adherence degrades across the file | instruction counts **+226%**, old rules "almost never deleted," median file 39 instructions [snippet]; evolution by "small incremental additions" [snippet]; stacking collapse 96%→20% at n=24 for conflicting constraints [snippet]; first-party "under 200 lines" guidance [fetched]. Extends doc 03's bloat discussion with the `k`-model in §4 and doc 06's decay evidence | **the canary criterion stops firing** (§4.2); older criteria' hit rate falls in the weeks after new ones are added; you catch yourself re-explaining a rule that is already in the file | Retire on the §9 rules; demote prose to deterministic (`k = 0`); split into on-demand skills so the always-loaded file stays small — [Claude Code cost docs](https://code.claude.com/docs/en/costs) make this argument first-party [fetched] |
-| **Ritual without effect** | the rubric is run, nothing changes; it becomes a thing you do, like completing the checklist from memory | normalization of deviance in aviation [snippet]; Hawthorne gap up to 34pp [snippet] | **no criterion has fired in a month**; no criterion retired in 90 days; repeat-offence rate flat across 12+ points; the weekly review takes under 2 minutes | Kill every criterion that has never fired. Require each surviving criterion to name the prototype and date it was born from — an unattributable criterion is a preference |
-| **Over-fitting the loop to one model** | criteria encode a specific model's habits ("always reminds it not to invent a `<Card>` variant"), then the model is retired | ≥60 days' notice is the *whole* warning; Sonnet 3.5 notified 2025-08-13, retired 2026-01-05 [snippet]; the local model table shows two more retirements inside 2026 [read locally] | after a model swap, the anchor set (§5.3 rung 4) produces a very different firing profile; criteria fire at ~0 or ~100% | Write criteria as **properties of the artifact**, never as instructions about the model's habits. Tag any unavoidably model-specific criterion with the model id **and an expiry date** |
-| **Criteria that encode last month's bug** | over-specific: names a route, a component, a copy string that no longer exists | the mining data says this is the default trajectory, since deletion is rare [snippet] | criterion has 0 fires in 20 prototypes; its text names an artifact you cannot find | §9 retirement rule 1 and 5, enforced at the weekly review |
+| **Rubric bloat past the read threshold** | criteria accrete, nothing retires, adherence degrades across the file | instruction counts **+226%**, old rules "almost never deleted," median file 39 instructions [search summary]; evolution by "small incremental additions" [search summary]; stacking collapse 96%→20% at n=24 for conflicting constraints [search summary]; first-party "under 200 lines" guidance [fetched]. Extends doc 03's bloat discussion with the `k`-model in §4 and doc 06's decay evidence | **the canary criterion stops firing** (§4.2); older criteria' hit rate falls in the weeks after new ones are added; you catch yourself re-explaining a rule that is already in the file | Retire on the §9 rules; demote prose to deterministic (`k = 0`); split into on-demand skills so the always-loaded file stays small — [Claude Code cost docs](https://code.claude.com/docs/en/costs) make this argument first-party [fetched] |
+| **Ritual without effect** | the rubric is run, nothing changes; it becomes a thing you do, like completing the checklist from memory | normalization of deviance in aviation [search summary]; Hawthorne gap up to 34pp [search summary] | **no criterion has fired in a month**; no criterion retired in 90 days; repeat-offence rate flat across 12+ points; the weekly review takes under 2 minutes | Kill every criterion that has never fired. Require each surviving criterion to name the prototype and date it was born from — an unattributable criterion is a preference |
+| **Over-fitting the loop to one model** | criteria encode a specific model's habits ("always reminds it not to invent a `<Card>` variant"), then the model is retired | ≥60 days' notice is the *whole* warning; Sonnet 3.5 notified 2025-08-13, retired 2026-01-05 [search summary]; the local model table shows two more retirements inside 2026 [read locally] | after a model swap, the anchor set (§5.3 rung 4) produces a very different firing profile; criteria fire at ~0 or ~100% | Write criteria as **properties of the artifact**, never as instructions about the model's habits. Tag any unavoidably model-specific criterion with the model id **and an expiry date** |
+| **Criteria that encode last month's bug** | over-specific: names a route, a component, a copy string that no longer exists | the mining data says this is the default trajectory, since deletion is rare [search summary] | criterion has 0 fires in 20 prototypes; its text names an artifact you cannot find | §9 retirement rule 1 and 5, enforced at the weekly review |
 | **The loop costs more than the defects it prevents** | hand-checked criteria accumulate, per-round verification grows, `c` in §3 overtakes `R·p·D` | no public measurement exists for design rubrics; §3's model is the only thing available | time-in-loop rising while rounds-to-acceptance is flat; the hand-checked half of the rubric growing faster than the machine-checked half | Track the **ratio of machine-checked to hand-checked criteria** as a first-class number. If it is falling, the loop is becoming a tax |
 | **False-positive fatigue** | a check that fires wrongly costs triage every build and trains you to ignore it — including when it is right | the `f` term in §3; the guardrail ladder in [design-sdlc 04](../design-sdlc/04-small-model-guardrails.md) treats precision as the gating property | triage minutes per week rising; you have started skipping a specific check's output | Any check whose false fires exceed its true fires in a month is retired or demoted to advisory, no exceptions |
 | **Measuring the loop instead of running it** | the scorecard becomes the work | — | the scorecard takes longer than the weekly review it summarizes | The scorecard is capped at 10 minutes (Deliverable C). If it exceeds that twice, cut rows, not time |
@@ -514,7 +514,7 @@ The four artifacts follow.
 | 1 | **Prose line in the rules/rubric file** | 5 | 0 | 0 | 0.6 *(assumed; no public measurement for design rubrics — doc 06)* | 6 *(assumed)* | 0 | **1.4** | ~0.4 mo at `R`=3 | Cheapest by far — **and the naive winner that causes bloat.** Its real cost is the `k`-tax on every other criterion (§4), not the 5 minutes |
 | 2 | **Hand-checked rubric line** (you eyeball it yourself each session) | 2 | 0 | **5** (20 s × 15 sessions) | 0.95 | 6 | 0 | 0.4 | 0.9 mo at `R`=1 — but `S ≤ 0` below `R`≈0.9/mo | Needs ~1 recurrence/month just to cover its running cost. **In the pathological per-round case (180 rounds/mo, `c`=60) it needs 10.5/month** and almost nothing reaches that. Batch verification to session boundaries |
 | 3 | **Deterministic check** — lint rule, assertion, hook | 45 | 2 | 0 | 0.98 | 6 | 1 | **7.7** | **5.1 mo at `R`=2**; 2.2 mo at `R`=4 | The workhorse. `k = 0`, runs without you, survives your worst week. **This is what `R_min` = 2 is calibrated against** |
-| 4 | **Visual / golden-screenshot regression** | 120 | 15 | 0 | 0.9 | 10 | 10 | 13.3 | net-negative below `R`≈2.8/mo; **4.1 mo at `R`=6** | Only for a stable surface you regenerate often. Matches test-automation ROI's "execution frequency is the biggest driver" and its 3–4 mo (high-frequency) / 12–18 mo (infrequent) spread [snippet] |
+| 4 | **Visual / golden-screenshot regression** | 120 | 15 | 0 | 0.9 | 10 | 10 | 13.3 | net-negative below `R`≈2.8/mo; **4.1 mo at `R`=6** | Only for a stable surface you regenerate often. Matches test-automation ROI's "execution frequency is the biggest driver" and its 3–4 mo (high-frequency) / 12–18 mo (infrequent) spread [search summary] |
 | 5 | **LLM-judge rubric criterion**, run per generation | 25 | 5 | 0 (tokens ≈ $0.01–0.05/run) | 0.7 *(assumed from UI-judge agreement; see [eval-tuning-loops 01](../eval-tuning-loops/01-grading-generated-prototypes.md))* | 6 | 12 (20% FP × 60 runs × 1 min) | 6.0 | net-negative below `R`≈4/mo; 5.3 mo at `R`=6 | Over-bought by small teams. The false-positive term dominates. Needs a validated judge before it is worth anything — [eval-tuning-loops 02](../eval-tuning-loops/02-reviewing-grades-and-human-calibration.md) owns that |
 | 6 | **Promotion-gate checklist line** ([design-sdlc 03 §10b](../design-sdlc/03-prototype-governance-outside-the-codebase.md)) | 2 | 0 | 0.5 (15 s × 2 promotions/mo) | 0.9 | **45** *(a miss that reaches an engineer costs a round trip)* | 0 | **0.05** | pays back on the first catch | **The best economics in the table.** Most "quality" items people want in a prototype rubric belong here instead (§9.3) |
 | 7 | **Anchor set of 3–5 frozen exemplars** (drift detector, §5.3 rung 4) | 30 | 10 | 0 | n/a — detects *your* drift, not the artifact's | n/a | 0 | n/a | n/a | Not a catch mechanism; it is the only cheap check on the grader. Budget it as fixed overhead, not as a check |
@@ -530,7 +530,7 @@ The four artifacts follow.
 | **Per generation** | deterministic gates run — schema/build valid, on-system check, axe, render check | machine | **0 min** | yes — hooks ([skill-resources/hooks.md](../../../skill-resources/hooks.md)) | none; it does not depend on you, which is why it survives |
 | **Per repair round** | one line in the round log: round *n*, what was asked, what regressed | repairer | **10 s** | partly (transcript) | you lose rounds-to-acceptance, the cheapest cost metric |
 | **Per session — the "Sign Out"** | every miss the human found gets a class label and one of three decisions: *prose criterion now* / *candidate, tally it* / *not a class* | rubric owner | **15 s per miss** | trigger it with a stop hook | **this is the step the checklist literature predicts you will drop** (§6.1). Losing it kills the whole stream's premise |
-| **Per prototype, before showing anyone** | grade in a **fresh session, artifact only, no build transcript** (§5.3 rung 1) | grader | **3–5 min** | no | self-attribution bias: 5× on approving a compromised patch [snippet] |
+| **Per prototype, before showing anyone** | grade in a **fresh session, artifact only, no build transcript** (§5.3 rung 1) | grader | **3–5 min** | no | self-attribution bias: 5× on approving a compromised patch [search summary] |
 | **Per prototype** | plot one point: misses at first human test; note rounds-to-acceptance | rubric owner | **30 s** | partly | no run chart, no honest measurement (§7.3) |
 | **Weekly** | the review: scorecard (Deliverable C); re-grade the anchor set; promote tallied candidates that hit `R_min`; **retire on the §9 rules**; check the canary | rubric owner | **30 min** | no | bloat (§4). This is where retirement lives, and it is the *first* thing dropped under pressure |
 | **Weekly, sampled** | second pair of eyes on 1-in-10 prototypes | someone else | **15 min of theirs** | no | the single-observer loop never breaks |
@@ -639,16 +639,16 @@ Deliberately disjoint from the picks already in [eval-tuning-loops 05](../eval-t
 |---|---|---|---|---|
 | Claude Code — Manage costs effectively | https://code.claude.com/docs/en/costs | The only first-party per-developer cost figures in the field ($13/active day, $150–250/mo, 90% under $30/day), plus the cache-read explanation of why round *n* costs more than round 1, the 7× agent-team multiplier, and the "keep CLAUDE.md under 200 lines" rule | **fetched OK** | guardrails-and-evals / rules |
 | DORA 2025 — State of AI-assisted Software Development | https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report | ~5,000 respondents: AI positively related to throughput, **negatively to delivery stability**; the amplifier framing. The strongest published argument that the verification step is the missing control | **fetched OK** | prototype-governance |
-| METR — Early-2025 AI developer productivity RCT **and its 2026 retraction** | https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ · https://metr.org/blog/2026-02-24-uplift-update/ | 16 devs / 246 tasks / +19% completion time, against a believed −20% — **and METR's own statement that the finding is outdated.** Cite the pair, never the first alone | snippet only (domain blocked) | foundational |
-| GitClear — AI code quality / maintainability gap | https://www.gitclear.com/the_ai_code_quality_maintainability_gap | Longitudinal duplication and refactoring series (moved code 25% → 3.8%; copy/paste 9.4% → 15.7%). Vendor-measured; use the direction | snippet only | foundational |
-| Stack Overflow 2025 Developer Survey — AI section | https://survey.stackoverflow.co/2025/ai | "Almost right, but not quite" at 66% is this stream's miss class, named and sized | snippet only | foundational |
-| Self-Attribution Bias: When AI Monitors Go Easy on Themselves | https://arxiv.org/abs/2603.04582 | The mechanism (same-turn / prior-turn attribution) that makes "grade in a fresh context" the cheapest governance move available; 5× effect on approving a compromised patch | snippet only | review-and-feedback |
-| Instruction Stacking Collapse | https://arxiv.org/abs/2608.02639 | 24 verifier-checked instructions, follow rate 96% → 20%; identifies *conflicting* constraints rather than count as the driver — the key input to the `k` model | snippet only | rules |
-| IFScale — How many instructions can LLMs follow at once? | https://arxiv.org/pdf/2507.11538 | 500-instruction density curve, three decay shapes; pair with the 2026 replication showing frontier models now hold accuracy far higher | snippet only | rules |
-| Agent READMEs: An Empirical Study of Context Files for Agentic Coding | https://arxiv.org/html/2511.12884v1 | 64 repos / 2,116 statements: instruction files grow by small additions and are rarely cut — the empirical case for an expiry rule | snippet only | rules |
-| Run-chart rules (IHI reference sheet; Perla/Provost/Murray lineage) | https://www.ihi.org/sites/default/files/lms/legacy/education/IHIOpenSchool/Courses/Documents/11_RunChartRulesReferenceSheet.pdf | Shift = 6+ points one side of the median; ≥12 points before the rules apply; ~5% false-signal rate. **The measurement discipline a solo practitioner can actually run** | snippet only | *proposed:* measurement & instrumentation |
-| Run Charts Revisited (simulation study) | https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0113825 | The simulation behind the rule choices; what each rule's false-positive rate actually is | snippet only | measurement & instrumentation |
-| The Leprechauns of Software Engineering (Bossavit) | https://books.google.com/books/about/The_Leprechauns_of_Software_Engineering.html?id=6LcpBgAAQBAJ | Why the 1:10:100 cost-of-defect curve should not appear in your business case | snippet only | foundational |
+| METR — Early-2025 AI developer productivity RCT **and its 2026 retraction** | https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ · https://metr.org/blog/2026-02-24-uplift-update/ | 16 devs / 246 tasks / +19% completion time, against a believed −20% — **and METR's own statement that the finding is outdated.** Cite the pair, never the first alone | search summary only (domain blocked) | foundational |
+| GitClear — AI code quality / maintainability gap | https://www.gitclear.com/the_ai_code_quality_maintainability_gap | Longitudinal duplication and refactoring series (moved code 25% → 3.8%; copy/paste 9.4% → 15.7%). Vendor-measured; use the direction | search summary only | foundational |
+| Stack Overflow 2025 Developer Survey — AI section | https://survey.stackoverflow.co/2025/ai | "Almost right, but not quite" at 66% is this stream's miss class, named and sized | search summary only | foundational |
+| Self-Attribution Bias: When AI Monitors Go Easy on Themselves | https://arxiv.org/abs/2603.04582 | The mechanism (same-turn / prior-turn attribution) that makes "grade in a fresh context" the cheapest governance move available; 5× effect on approving a compromised patch | search summary only | review-and-feedback |
+| Instruction Stacking Collapse | https://arxiv.org/abs/2608.02639 | 24 verifier-checked instructions, follow rate 96% → 20%; identifies *conflicting* constraints rather than count as the driver — the key input to the `k` model | search summary only | rules |
+| IFScale — How many instructions can LLMs follow at once? | https://arxiv.org/pdf/2507.11538 | 500-instruction density curve, three decay shapes; pair with the 2026 replication showing frontier models now hold accuracy far higher | search summary only | rules |
+| Agent READMEs: An Empirical Study of Context Files for Agentic Coding | https://arxiv.org/html/2511.12884v1 | 64 repos / 2,116 statements: instruction files grow by small additions and are rarely cut — the empirical case for an expiry rule | search summary only | rules |
+| Run-chart rules (IHI reference sheet; Perla/Provost/Murray lineage) | https://www.ihi.org/sites/default/files/lms/legacy/education/IHIOpenSchool/Courses/Documents/11_RunChartRulesReferenceSheet.pdf | Shift = 6+ points one side of the median; ≥12 points before the rules apply; ~5% false-signal rate. **The measurement discipline a solo practitioner can actually run** | search summary only | *proposed:* measurement & instrumentation |
+| Run Charts Revisited (simulation study) | https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0113825 | The simulation behind the rule choices; what each rule's false-positive rate actually is | search summary only | measurement & instrumentation |
+| The Leprechauns of Software Engineering (Bossavit) | https://books.google.com/books/about/The_Leprechauns_of_Software_Engineering.html?id=6LcpBgAAQBAJ | Why the 1:10:100 cost-of-defect curve should not appear in your business case | search summary only | foundational |
 
 ---
 
@@ -670,64 +670,64 @@ Deliberately disjoint from the picks already in [eval-tuning-loops 05](../eval-t
 - https://arxiv.org/abs/2507.09089 and all other `arxiv.org` URLs below — [403 at CONNECT]
 - https://dora.dev/dora-report-2025/ · https://survey.stackoverflow.co/2025/ai · https://www.gitclear.com/* · `x.com` and all thread-mirror domains — [403 at CONNECT]
 
-**Cost, productivity and delivery evidence** — all [snippet only] unless marked
+**Cost, productivity and delivery evidence** — all [search summary only] unless marked
 
 - https://code.claude.com/docs/en/costs — [fetched]
 - https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report — [fetched]
-- https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ — [snippet]
-- https://metr.org/blog/2026-02-24-uplift-update/ — [snippet]
-- https://arxiv.org/abs/2507.09089 — [snippet]
-- https://www.gitclear.com/ai_assistant_code_quality_2025_research — [snippet]
-- https://www.gitclear.com/the_ai_code_quality_maintainability_gap — [snippet]
-- https://survey.stackoverflow.co/2025/ai — [snippet]
-- https://stackoverflow.co/company/press/archive/stack-overflow-2025-developer-survey/ — [snippet]
-- https://books.google.com/books/about/The_Leprechauns_of_Software_Engineering.html?id=6LcpBgAAQBAJ — [snippet]
-- https://keploy.io/blog/community/test-automation-roi — [snippet, vendor]
-- https://bug0.com/blog/test-automation-roi-board-2026 — [snippet, vendor]
+- https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ — [search summary]
+- https://metr.org/blog/2026-02-24-uplift-update/ — [search summary]
+- https://arxiv.org/abs/2507.09089 — [search summary]
+- https://www.gitclear.com/ai_assistant_code_quality_2025_research — [search summary]
+- https://www.gitclear.com/the_ai_code_quality_maintainability_gap — [search summary]
+- https://survey.stackoverflow.co/2025/ai — [search summary]
+- https://stackoverflow.co/company/press/archive/stack-overflow-2025-developer-survey/ — [search summary]
+- https://books.google.com/books/about/The_Leprechauns_of_Software_Engineering.html?id=6LcpBgAAQBAJ — [search summary]
+- https://keploy.io/blog/community/test-automation-roi — [search summary, vendor]
+- https://bug0.com/blog/test-automation-roi-board-2026 — [search summary, vendor]
 
-**Rubric bloat and instruction following** — all [snippet only]
+**Rubric bloat and instruction following** — all [search summary only]
 
-- https://arxiv.org/pdf/2507.11538 (IFScale) — [snippet]
-- https://arxiv.org/abs/2608.02639 (Instruction Stacking Collapse) — [snippet]
-- https://arxiv.org/html/2511.12884v1 (Agent READMEs) — [snippet]
-- https://arxiv.org/pdf/2606.12231 (Rule Taxonomy and Evolution in AI IDEs) — [snippet]
-- https://arxiv.org/html/2606.09090 (Context Rot in AI-Assisted Software Development) — [snippet]
-- https://wonderingaboutai.substack.com/p/how-to-stop-your-claudemd-file-from — [snippet, second-hand summary of the Chakrabarti analysis]
-- https://docs.bswen.com/blog/2026-04-23-prevent-claudemd-bloat/ — [snippet; source of the unverified "~60 rules" folk number]
+- https://arxiv.org/pdf/2507.11538 (IFScale) — [search summary]
+- https://arxiv.org/abs/2608.02639 (Instruction Stacking Collapse) — [search summary]
+- https://arxiv.org/html/2511.12884v1 (Agent READMEs) — [search summary]
+- https://arxiv.org/pdf/2606.12231 (Rule Taxonomy and Evolution in AI IDEs) — [search summary]
+- https://arxiv.org/html/2606.09090 (Context Rot in AI-Assisted Software Development) — [search summary]
+- https://wonderingaboutai.substack.com/p/how-to-stop-your-claudemd-file-from — [search summary, second-hand summary of the Chakrabarti analysis]
+- https://docs.bswen.com/blog/2026-04-23-prevent-claudemd-bloat/ — [search summary; source of the unverified "~60 rules" folk number]
 
-**Self-review, blinding and reviewer bias** — all [snippet only]
+**Self-review, blinding and reviewer bias** — all [search summary only]
 
-- https://arxiv.org/abs/2603.04582 (Self-Attribution Bias) — [snippet]
-- https://arxiv.org/abs/2604.22891 (Quantifying and Mitigating Self-Preference Bias of LLM Judges) — [snippet]
-- https://www.pnas.org/doi/10.1073/pnas.1707323114 (Tomkins et al., single- vs double-blind) — [snippet]
-- https://arxiv.org/abs/1702.00502 (WSDM 2017 companion) — [snippet]
-- https://arxiv.org/pdf/2504.18407 (developer perception alignment in code reviews) — [snippet]
-- https://arxiv.org/abs/2407.01407 (debiasing code review support) — [snippet]
-- https://myscp.onlinelibrary.wiley.com/doi/abs/10.1016/j.jcps.2011.08.002 (IKEA effect) — [snippet]
-- https://www.hbs.edu/ris/Publication%20Files/11-091.pdf (IKEA effect working paper) — [snippet]
+- https://arxiv.org/abs/2603.04582 (Self-Attribution Bias) — [search summary]
+- https://arxiv.org/abs/2604.22891 (Quantifying and Mitigating Self-Preference Bias of LLM Judges) — [search summary]
+- https://www.pnas.org/doi/10.1073/pnas.1707323114 (Tomkins et al., single- vs double-blind) — [search summary]
+- https://arxiv.org/abs/1702.00502 (WSDM 2017 companion) — [search summary]
+- https://arxiv.org/pdf/2504.18407 (developer perception alignment in code reviews) — [search summary]
+- https://arxiv.org/abs/2407.01407 (debiasing code review support) — [search summary]
+- https://myscp.onlinelibrary.wiley.com/doi/abs/10.1016/j.jcps.2011.08.002 (IKEA effect) — [search summary]
+- https://www.hbs.edu/ris/Publication%20Files/11-091.pdf (IKEA effect working paper) — [search summary]
 
-**Procedural adherence and its decay** — all [snippet only]
+**Procedural adherence and its decay** — all [search summary only]
 
-- https://link.springer.com/article/10.1186/s12913-025-12569-0 (WHO SSC completeness meta-analysis) — [snippet]
-- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6419440/ (Swiss academic centre adherence by phase) — [snippet]
-- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12385942/ (before-and-after intervention, Croatia) — [snippet]
-- https://losacollaborative.com/wp-content/uploads/2021/02/ICAO-Document-9803-LOSA.pdf (LOSA / ICAO Doc 9803) — [snippet]
-- https://flightsafety.org/asw-article/normalization-of-deviance/ — [snippet]
-- https://pubmed.ncbi.nlm.nih.gov/25002555/ (Hawthorne quantified by electronic monitoring) — [snippet]
-- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6090841/ (overt vs covert hand-hygiene observation) — [snippet]
+- https://link.springer.com/article/10.1186/s12913-025-12569-0 (WHO SSC completeness meta-analysis) — [search summary]
+- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6419440/ (Swiss academic centre adherence by phase) — [search summary]
+- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12385942/ (before-and-after intervention, Croatia) — [search summary]
+- https://losacollaborative.com/wp-content/uploads/2021/02/ICAO-Document-9803-LOSA.pdf (LOSA / ICAO Doc 9803) — [search summary]
+- https://flightsafety.org/asw-article/normalization-of-deviance/ — [search summary]
+- https://pubmed.ncbi.nlm.nih.gov/25002555/ (Hawthorne quantified by electronic monitoring) — [search summary]
+- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6090841/ (overt vs covert hand-hygiene observation) — [search summary]
 
-**Measurement discipline** — all [snippet only]
+**Measurement discipline** — all [search summary only]
 
-- https://www.ihi.org/sites/default/files/lms/legacy/education/IHIOpenSchool/Courses/Documents/11_RunChartRulesReferenceSheet.pdf — [snippet]
-- https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0113825 (Run Charts Revisited) — [snippet]
-- https://publications.aap.org/hospitalpediatrics/article/14/1/e83/196276/A-Practical-Guide-to-QI-Data-Analysis-Run-and — [snippet]
-- https://pmc.ncbi.nlm.nih.gov/articles/PMC3538092/ (regression to the mean in composite quality indicators) — [snippet]
-- https://www.iwh.on.ca/what-researchers-mean-by/regression-to-mean — [snippet]
-- https://kpidepot.com/kpi/defect-escape-rate — [snippet, vendor KPI page; thresholds are folklore-grade]
+- https://www.ihi.org/sites/default/files/lms/legacy/education/IHIOpenSchool/Courses/Documents/11_RunChartRulesReferenceSheet.pdf — [search summary]
+- https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0113825 (Run Charts Revisited) — [search summary]
+- https://publications.aap.org/hospitalpediatrics/article/14/1/e83/196276/A-Practical-Guide-to-QI-Data-Analysis-Run-and — [search summary]
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC3538092/ (regression to the mean in composite quality indicators) — [search summary]
+- https://www.iwh.on.ca/what-researchers-mean-by/regression-to-mean — [search summary]
+- https://kpidepot.com/kpi/defect-escape-rate — [search summary, vendor KPI page; thresholds are folklore-grade]
 
-**Model lifecycle** — [snippet] unless marked
+**Model lifecycle** — [search summary] unless marked
 
-- https://platform.claude.com/docs/en/about-claude/model-deprecations — [snippet]
+- https://platform.claude.com/docs/en/about-claude/model-deprecations — [search summary]
 - Bundled `claude-api` skill `shared/models.md` — [read locally]
 
 **Repo cross-references (read locally)**
