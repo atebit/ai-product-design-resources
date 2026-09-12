@@ -6,14 +6,46 @@
 
 **Explicitly out of scope, with owners:** the taxonomy of miss classes (doc 01); repair mechanics, rollback, and surgical patching (doc 02, and [prototype-construction 05](../prototype-construction/05-surgical-editing-iteration.md)); how to phrase a criterion (doc 03); what craft criteria contain (doc 04); tools and harnesses (doc 06); eval-set management, CI gating, and multi-person change control ([eval-tuning-loops 05](../eval-tuning-loops/05-loop-architecture-and-governance.md)); grading mechanics and judge calibration ([eval-tuning-loops 01](../eval-tuning-loops/01-grading-generated-prototypes.md) and [02](../eval-tuning-loops/02-reviewing-grades-and-human-calibration.md)).
 
-> **Verification note — read this before trusting any number below.** Verified live 12 September 2026. This session's outbound egress was restricted by organization policy: `metr.org`, `arxiv.org`, `dora.dev`, `x.com`, `hamel.dev`, `pmc.ncbi.nlm.nih.gov`, `survey.stackoverflow.co`, `gitclear.com`, `substack.com`, `news.ycombinator.com`, `reddit.com` and most journal and vendor domains all returned `403` at the CONNECT stage and could not be fetched. **Two pages were fetched in full** ([Claude Code cost docs](https://code.claude.com/docs/en/costs), [Google Cloud's 2025 DORA announcement](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report)), and one first-party file was read from disk (the bundled `claude-api` skill's model/pricing table, cached 2026-06-24). **Every other claim below is marked `[search summary]` and rests on a search-result summary only — the underlying page did not load and was not independently verified.** Where a number matters to an argument, the argument is written so you can see what breaks if the number is wrong. Practitioner posts on X could not be retrieved at all: `x.com` is blocked and no thread-mirror domain resolved, so **no tweet is quoted in this document**, and the two practitioner claims that appear are marked as second-hand summaries of blog posts that were themselves only seen as search summarys.
+Researched live 12 September 2026. **This document does not claim that every claim links a verified source, because in this session that was not possible.** Two pages were fetched, one original dataset was measured, and everything else is search-derived and labelled as such — the section immediately below says exactly which is which, and names the eight numbers a session with wider egress should verify first.
+
+## Verification constraints — read this before trusting any number below
+
+Verified live **12 September 2026**, under an unusually tight egress policy. Confidence labels in this document are not decoration; they are load-bearing.
+
+| Label | Means | Count |
+|---|---|---|
+| **[fetched]** | I requested the page in this session and read its content | **2 pages** — [Claude Code cost docs](https://code.claude.com/docs/en/costs) and [Google Cloud's 2025 DORA announcement](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report) |
+| **[measured]** | I collected the data myself in this session and the method is reproducible in the text | **1 dataset** — the context-file census in §4.3, 24 files pulled from `raw.githubusercontent.com` |
+| **[read locally]** | A file on this machine | the bundled `claude-api` skill's model/pricing and deprecation tables (cached 2026-06-24); the repo's own neighbouring research docs |
+| **[search summary]** | **A search engine's index-derived summary. The page did not load. I have not seen the primary source.** | everything else |
+| **[blocked: host]** | Attempted and refused at the network layer | listed below |
+
+**Blocked at CONNECT (HTTP 403, organization egress policy), not retried:** `metr.org`, `metr.substack.com`, `arxiv.org`, `dora.dev`, `x.com`, `huggingface.co`, `hamel.dev`, `pmc.ncbi.nlm.nih.gov` / `pubmed.ncbi.nlm.nih.gov` / `www.ncbi.nlm.nih.gov`, `survey.stackoverflow.co`, `www.gitclear.com`, `link.springer.com`, `journals.plos.org`, `onlinelibrary.wiley.com`, `www.pnas.org`, `substack.com`, `news.ycombinator.com`, `www.reddit.com`, `simonwillison.net`, `docs.github.com`, `platform.claude.com`, `www.anthropic.com`, `www.figma.com`, `vercel.com`, and most other vendor and journal domains. **Reachable:** `code.claude.com`, `cloud.google.com`, `github.com`, `raw.githubusercontent.com` (the GitHub REST API refused repository-scoped calls for repos not attached to this session, so file *contents* were obtainable and commit *histories* were not).
+
+**Practitioner reality on X, which the stream brief asks for, could not be sourced at all.** `x.com` is blocked, no thread-mirror domain (threadreaderapp, typefully) resolved, and Hacker News and Reddit are blocked. **No tweet is quoted anywhere in this document**, and the two practitioner claims that do appear (§4.1's "~60 rules" folk number; the "add it to CLAUDE.md" habit) are labelled as second-hand summaries of blog posts that were themselves only seen as search summaries. Doc 06 and the other stream documents may have had better luck; this one did not, and inventing a plausible tweet would be worse than the gap.
+
+**What this changes about how to read the document.** The reasoning — the cost decomposition in §1, the break-even model in §3, the bloat model in §4, the separation ladder in §5, the measurement design in §7 — **does not depend on egress at all.** It is arithmetic with stated assumptions, and a reader can check every step and substitute their own inputs. That is deliberately where the weight sits. The borrowed statistics are calibration, not foundation: §1.2's conclusion (attention costs 6–17× tokens) survives any plausible value of its inputs; §3's ranking of check types survives a wide range of `p` and `D`; §4's model is explicitly a model.
+
+**Numbers a wider-egress session should harden first**, in order of how much they would change:
+
+| # | Claim | Where | Why it matters | Source to verify |
+|---|---|---|---|---|
+| 1 | METR RCT effect size **and its confidence interval** — and METR's own Feb-2026 statement that the finding is outdated | §2.1 | the most-cited number in this debate; the CI was never retrieved | *Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity*, METR, July 2025 (arXiv 2507.09089), Appendix D; plus METR, *We are Changing our Developer Productivity Experiment Design*, 24 Feb 2026 |
+| 2 | DORA's stability/rework finding as stated in the report body rather than the announcement blog | §2.2 | the load-bearing argument for running the loop at all | *2025 DORA State of AI-assisted Software Development* (full report PDF), and *DORA: ROI of AI-assisted Software Development*, 2026.01 |
+| 3 | Instruction-following decay: IFScale's curve **and** the 2026 Arize replication that partly contradicts it | §4.1 | the `k` parameter that sets the rubric size cap | IFScale, *How Many Instructions Can LLMs Follow at Once?* (arXiv 2507.11538); Arize 2026 replication; *Instruction Stacking Collapse* (arXiv 2608.02639) |
+| 4 | The "+226% instruction growth, deletions rare" analysis of 1,867 repos | §4.1, §8 | the empirical case for an expiry rule; seen only third-hand via a newsletter | Chakrabarti rules-file analysis (primary source not located; the newsletter summary is at `wonderingaboutai.substack.com`) |
+| 5 | Self-attribution bias effect size and setting | §5.2 | justifies the one free governance move in the document | *Self-Attribution Bias: When AI Monitors Go Easy on Themselves* (arXiv 2603.04582), Khullar, Hopkins, Wang & Roger, 4 Mar 2026 |
+| 6 | WHO Surgical Safety Checklist phase compliance (Sign In / Time Out / Sign Out) | §6.1 | the basis for predicting which step of the loop decays | *Beyond compliance: … WHO surgical safety checklist — a systematic review and meta-analysis*, BMC Health Serv Res, 2025 |
+| 7 | Run-chart rule thresholds and their false-positive rates | §7.2 | the minimum honest measurement's statistical basis | Perla, Provost & Murray, *BMJ Qual Saf* 2011; Anhøj & Olesen, *Run Charts Revisited*, PLOS ONE 2014 |
+| 8 | GitClear's duplication and moved-code series | §2.3 | vendor-measured; direction used, magnitude not relied on | GitClear, *AI Copilot Code Quality* (2025) and *The Maintainability Gap* (2026) |
 
 ## Table of Contents
 
+0. [Verification constraints](#verification-constraints--read-this-before-trusting-any-number-below) — what was fetched, what was measured, what is search-derived
 1. [What a patch round actually costs](#1-what-a-patch-round-actually-costs)
 2. [The field evidence on whether any of this pays](#2-the-field-evidence-on-whether-any-of-this-pays)
 3. [Break-even arithmetic for promoting a miss into a durable check](#3-break-even-arithmetic-for-promoting-a-miss-into-a-durable-check)
-4. [The bloat tax: why the cheapest criterion is not free](#4-the-bloat-tax-why-the-cheapest-criterion-is-not-free)
+4. [The bloat tax: why the cheapest criterion is not free](#4-the-bloat-tax-why-the-cheapest-criterion-is-not-free) — includes an original 24-file census
 5. [Who owns the rubric when the designer is the reviewer](#5-who-owns-the-rubric-when-the-designer-is-the-reviewer)
 6. [Cadence a single practitioner can sustain — and what goes first](#6-cadence-a-single-practitioner-can-sustain--and-what-goes-first)
 7. [Knowing the loop works](#7-knowing-the-loop-works)
@@ -160,6 +192,8 @@ The reflexive justification for catching things earlier is Boehm's 1:10:100 cost
 
 **Why it matters:** "Add it to the rules file" is free at the moment of decision and expensive in aggregate. A model that anyone can re-run with their own numbers is the only defence against a rubric that grows monotonically because each individual addition looked obviously worthwhile.
 
+**This section is the spine of the document, and it is the part that depends on no external source.** Every symbol below is something you can time with a stopwatch or count on a page; every assumed value is marked as assumed and can be replaced with yours. If the borrowed statistics elsewhere in this document turn out to be wrong, the model still stands — what changes is which row of [Deliverable A](#deliverable-a--break-even-table) you land on. Read it as arithmetic you are expected to argue with, not as a finding.
+
 ### 3.1 The model
 
 For a candidate check, define:
@@ -244,6 +278,44 @@ Three corollaries:
 - **A canary criterion makes `k` observable for free.** Add one trivially verifiable, zero-value criterion to the rubric — e.g. "every generated file ends with the comment `<!-- rubric:v7 -->`" — and log whether it fires. When the canary stops firing, the rubric has passed the point where it is being read. This costs one line and one grep, needs no eval harness, and is the only bloat detector in this document a solo practitioner can actually run. *No published source proposes this; it is a construction from the evidence above and is untested.*
 
 **Falsifiable in an afternoon:** generate the same prompt 10× against rubric sizes n = 5, 15, 30, 60 with the canary in each, count honored criteria, fit `k`. Cost at Opus 5 list prices: 40 generations × ~8k output ≈ 320k output tokens ≈ **$8**. Doc 06 owns the harness for it.
+
+### 4.3 Where real instruction files actually sit — an original census [measured]
+
+The growth claims in §4.1 were only reachable third-hand. GitHub *was* reachable in this session, so the static question — how big are these files in practice — was measured directly rather than cited. **Method:** pull `CLAUDE.md` and `AGENTS.md` from the default branch of 25 prominent agent-adjacent and mainstream repositories via `raw.githubusercontent.com`, drop files under 100 bytes (several are one-line `@AGENTS.md` import stubs), de-duplicate `main`/`master`, and count lines, bytes, bullet/numbered statements, and normative keywords (`must|never|always|do not|don't|required|shall|avoid|ensure`). **n = 24 files.** Collected 12 September 2026. Reproducible in one line:
+
+```bash
+for r in openai/codex sst/opencode All-Hands-AI/OpenHands browser-use/browser-use cloudflare/agents \
+         vercel/ai langchain-ai/langchain PostHog/posthog calcom/cal.com tldraw/tldraw \
+         storybookjs/storybook supabase/supabase danny-avila/LibreChat elie222/inbox-zero \
+         microsoft/vscode facebook/react apache/airflow n8n-io/n8n block/goose cline/cline \
+         RooCodeInc/Roo-Code; do
+  for b in main master; do for f in CLAUDE.md AGENTS.md; do
+    u="https://raw.githubusercontent.com/$r/$b/$f"
+    curl -sf "$u" -o t && [ $(wc -c <t) -ge 100 ] && \
+      echo "$r $b $f lines=$(wc -l <t) bytes=$(wc -c <t) bullets=$(grep -cE '^\s*([-*+]|[0-9]+\.)\s+\S' t)"
+  done; done
+done
+```
+
+| Statistic | Value |
+|---|---|
+| Files measured | **24** (from 21 repos with a file ≥100 bytes) |
+| Lines — median / mean / range | **233** / 275.5 / 5–1,017 |
+| Bullet-or-numbered statements — median / mean / max | **79.5** / 81.8 / 314 |
+| Files **over 200 lines** (the first-party guidance ceiling [fetched]) | **13 of 24 — 54%** |
+| Files **over 40 statements** | 15 of 24 — 62% |
+| Files **over 60 statements** (the folk threshold, §4.1) | **14 of 24 — 58%** |
+| Largest | `browser-use/browser-use` `AGENTS.md` — 1,017 lines, 38.5 KB, 169 statements |
+| Densest | `All-Hands-AI/OpenHands` `AGENTS.md` — 714 lines, **118 KB**, 314 statements, 97 normative keywords |
+| Smallest non-stub | `microsoft/vscode` `AGENTS.md` — 5 lines, 271 bytes; `facebook/react` `CLAUDE.md` — 13 lines |
+
+Three readings, in descending confidence:
+
+1. **The median real-world instruction file is already past both published thresholds** — 233 lines against a 200-line first-party guideline, and ~80 statements against a ~60 folk threshold. Whatever `k` is, more than half the corpus is operating on the wrong side of `n*` if either rule of thumb is close to right. This is a static fact about the corpus, not a claim about outcomes; **no quality measurement accompanies it**, and these are engineering repos, not design rubrics.
+2. **The distribution is extremely wide** — 5 to 1,017 lines, a 200× spread across projects of comparable seriousness. There is no convergent practice. Anyone claiming their file length is normal is choosing a percentile.
+3. **A structural pattern worth copying:** 9 of the 25 repos ship `CLAUDE.md` as a one-line `@AGENTS.md` import stub rather than a second copy. One canonical file, imported by the others, is the cheap fix for the duplicate-rubric problem that doc 03 has to worry about.
+
+**What this census does *not* show.** It cannot support the growth claim (§4.1's "+226%, deletions rare"): the GitHub REST API refused commit-history calls for repositories not attached to this session, so **the per-file edit history was not obtainable and that claim remains [search summary] only**. A session with repository access could get it in minutes by walking `GET /repos/{r}/commits?path=AGENTS.md` and summing additions against deletions — that is verification item 4 in the table at the top.
 
 ---
 
@@ -477,7 +549,7 @@ A corollary worth stating plainly, because it contradicts the reflexive answer: 
 
 1. **Human attention is the scarce resource; tokens are not.** At documented Claude Code rates, a round costs ~$1 of machine and 6–17× that in attention (§1.2). Every recommendation in this document is a way of spending fewer human minutes, and none of them is a way of spending fewer tokens.
 2. **A criterion that stays human-checked is a recurring tax; a criterion that becomes machine-checked is a one-off investment.** The ladder in [design-sdlc 04](../design-sdlc/04-small-model-guardrails.md) and the altitude ladder in [eval-tuning-loops 03](../eval-tuning-loops/03-feeding-grades-back-text-level.md) are cost gradients, not just reliability gradients (§1.3, §3).
-3. **The rubric has a size optimum and nobody knows where theirs is.** `n* = (a₀/k + 1)/2`; the three rules of thumb in circulation (60, 200, 24) are one model at three values of `k` (§4.2). `k` is measurable for $8.
+3. **The rubric has a size optimum and nobody knows where theirs is.** `n* = (a₀/k + 1)/2`; the three rules of thumb in circulation (60, 200, 24) are one model at three values of `k` (§4.2). `k` is measurable for $8 — and the 24-file census in §4.3 shows the median real instruction file is already at 233 lines and ~80 statements, past both published thresholds [measured].
 4. **Separation of concerns at solo scale is separation of *contexts*, not people** — and the one rung that costs nothing (grade in a fresh session, artifact only) is the one with a measured effect size behind it, 5× on approval of a compromised patch (§5.2–5.3).
 5. **The step that decays is the step after the work is done.** Surgical Sign Out at 22% against Time Out at 96–100% in the same theatre predicts that promoting a miss into a criterion is what gets dropped. Design that step to cost 15 seconds, and give it a structural trigger (§6.1).
 6. **Retirement is the half of the ratchet everyone omits.** Instruction counts grow 226% and deletions are rare in the wild (§4.1). A rubric with no expiry rule has a known trajectory.
@@ -637,8 +709,8 @@ Deliberately disjoint from the picks already in [eval-tuning-loops 05](../eval-t
 
 | Name | URL | What it is | Verified | Category |
 |---|---|---|---|---|
-| Claude Code — Manage costs effectively | https://code.claude.com/docs/en/costs | The only first-party per-developer cost figures in the field ($13/active day, $150–250/mo, 90% under $30/day), plus the cache-read explanation of why round *n* costs more than round 1, the 7× agent-team multiplier, and the "keep CLAUDE.md under 200 lines" rule | **fetched OK** | guardrails-and-evals / rules |
-| DORA 2025 — State of AI-assisted Software Development | https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report | ~5,000 respondents: AI positively related to throughput, **negatively to delivery stability**; the amplifier framing. The strongest published argument that the verification step is the missing control | **fetched OK** | prototype-governance |
+| Claude Code — Manage costs effectively | https://code.claude.com/docs/en/costs | The only first-party per-developer cost figures in the field ($13/active day, $150–250/mo, 90% under $30/day), plus the cache-read explanation of why round *n* costs more than round 1, the 7× agent-team multiplier, and the "keep CLAUDE.md under 200 lines" rule | **fetched** | guardrails-and-evals / rules |
+| DORA 2025 — State of AI-assisted Software Development | https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report | ~5,000 respondents: AI positively related to throughput, **negatively to delivery stability**; the amplifier framing. The strongest published argument that the verification step is the missing control | **fetched** | prototype-governance |
 | METR — Early-2025 AI developer productivity RCT **and its 2026 retraction** | https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ · https://metr.org/blog/2026-02-24-uplift-update/ | 16 devs / 246 tasks / +19% completion time, against a believed −20% — **and METR's own statement that the finding is outdated.** Cite the pair, never the first alone | search summary only (domain blocked) | foundational |
 | GitClear — AI code quality / maintainability gap | https://www.gitclear.com/the_ai_code_quality_maintainability_gap | Longitudinal duplication and refactoring series (moved code 25% → 3.8%; copy/paste 9.4% → 15.7%). Vendor-measured; use the direction | search summary only | foundational |
 | Stack Overflow 2025 Developer Survey — AI section | https://survey.stackoverflow.co/2025/ai | "Almost right, but not quite" at 66% is this stream's miss class, named and sized | search summary only | foundational |
@@ -658,6 +730,11 @@ Deliberately disjoint from the picks already in [eval-tuning-loops 05](../eval-t
 
 - https://code.claude.com/docs/en/costs — [fetched]
 - https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report — [fetched]
+
+**Measured in this session — original data (§4.3)**
+
+- 24 `CLAUDE.md` / `AGENTS.md` files pulled from the default branches of 21 repositories via `https://raw.githubusercontent.com/<repo>/<branch>/<file>` — [measured]. Repositories: `openai/codex`, `sst/opencode`, `All-Hands-AI/OpenHands`, `browser-use/browser-use`, `cloudflare/agents`, `vercel/ai`, `langchain-ai/langchain`, `PostHog/posthog`, `calcom/cal.com`, `tldraw/tldraw`, `storybookjs/storybook`, `supabase/supabase`, `danny-avila/LibreChat`, `elie222/inbox-zero`, `microsoft/vscode`, `facebook/react`, `apache/airflow`, `n8n-io/n8n`, `block/goose`, `cline/cline`, `RooCodeInc/Roo-Code`. Method and command in §4.3.
+- `https://api.github.com/repos/{owner}/{repo}/commits?path=...` — [blocked: api.github.com for unattached repositories] — commit histories refused, so the file-growth claim could not be verified first-hand.
 
 **Read from local disk**
 
