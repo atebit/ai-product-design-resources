@@ -740,12 +740,15 @@ Deliberately disjoint from the picks already in [eval-tuning-loops 05](../eval-t
 
 - Bundled `claude-api` skill, model & pricing table (cached 2026-06-24) and `shared/models.md` deprecation table — [read locally]
 
-**Attempted and failed**
+**Attempted and refused — not retried, per policy**
 
-- https://cloud.google.com/resources/content/dora-roi-of-ai-assisted-software-development — [fetch returned no usable content]
-- https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ · https://metr.org/blog/2026-02-24-uplift-update/ · https://metr.substack.com/p/2026-02-24-uplift-update — [403 at CONNECT; egress policy]
-- https://arxiv.org/abs/2507.09089 and all other `arxiv.org` URLs below — [403 at CONNECT]
-- https://dora.dev/dora-report-2025/ · https://survey.stackoverflow.co/2025/ai · https://www.gitclear.com/* · `x.com` and all thread-mirror domains — [403 at CONNECT]
+- https://cloud.google.com/resources/content/dora-roi-of-ai-assisted-software-development — [fetched but returned no usable content]
+- https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ · https://metr.org/blog/2026-02-24-uplift-update/ · https://metr.substack.com/p/2026-02-24-uplift-update — [blocked: metr.org, metr.substack.com]
+- https://arxiv.org/abs/2507.09089 and **every other `arxiv.org` URL cited below** — [blocked: arxiv.org]
+- https://dora.dev/dora-report-2025/ — [blocked: dora.dev] · https://survey.stackoverflow.co/2025/ai — [blocked: survey.stackoverflow.co] · https://www.gitclear.com/* — [blocked: www.gitclear.com]
+- https://www.pnas.org/doi/10.1073/pnas.1707323114 — [blocked: www.pnas.org] · https://link.springer.com/* — [blocked: link.springer.com] · https://journals.plos.org/* — [blocked: journals.plos.org] · `pmc.ncbi.nlm.nih.gov`, `pubmed.ncbi.nlm.nih.gov`, `www.ncbi.nlm.nih.gov` — [blocked]
+- `x.com` and every thread-mirror domain tried (threadreaderapp, typefully), plus `news.ycombinator.com` and `www.reddit.com` — [blocked] → **no practitioner post is quoted in this document**
+- https://huggingface.co/papers/2507.09089 — [blocked: huggingface.co] · https://platform.claude.com/* — [blocked] · https://www.anthropic.com/* — [blocked] · https://hamel.dev/* — [blocked] · https://docs.github.com/* — [blocked]
 
 **Cost, productivity and delivery evidence** — all [search summary only] unless marked
 
